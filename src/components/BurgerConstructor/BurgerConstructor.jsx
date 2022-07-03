@@ -13,11 +13,11 @@ const BurgerConstructor = (props) => {
 
 	return (
 		<section className={`${styles.box} mt-25 ml-4 mr-4`}>
-			<ul className={styles.list}>
+			<ul>
 				<li className={`${styles.bunItem} ml-8`}>
 					<ConstructorElement type='top' isLocked={true} text="Краторная булка N-200i (верх)" price={20} thumbnail={props.data[0].image} />
 				</li>
-				<ul className={`${styles.fillingList} ml-4 custom-scroll`}>
+				<ul className={`${styles.fillingList} ml-4`}>
 					{props.data.slice(1, -1).map(ingredient => (<ConstructorItem data={ingredient} key={ingredient._id} />))}
 				</ul>
 				<li className={`${styles.bunItem} ml-8 mt-4`}>

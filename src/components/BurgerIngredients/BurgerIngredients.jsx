@@ -13,7 +13,7 @@ const BurgerIngredients = (props) => {
 			<h1 className="text text_type_main-large mt-10 mb-5">
 				Соберите бургер
 			</h1>
-			<div className={styles.box_tab}>
+			<div className={styles.boxTab}>
 				<Tab value="buns" active={current === 'buns'} onClick={setCurrent}>
 					Булки
 				</Tab>
@@ -24,10 +24,10 @@ const BurgerIngredients = (props) => {
 					Начинки
 				</Tab>
 			</div>
-			<ul className={styles.box}>
+			<ul className={styles.boxIngredients}>
 				<li className='mt-10'>
 					<h2 className="text text_type_main-medium">Булки</h2>
-					<ul className={`${styles.items} custom-scroll`}>
+					<ul className={`${styles.items}`}>
 						{props.data.filter(ingredient => ingredient.type === 'bun').map(ingredient => (<IngredientCard ingredient={ingredient} key={ingredient._id} />))}
 					</ul>
 				</li>

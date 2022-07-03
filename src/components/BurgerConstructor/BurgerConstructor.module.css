@@ -3,13 +3,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-}
-
-.list {
-	list-style-type: none;
-	max-height: 60vh;
-	overflow-y: auto;
-
+	max-height: 80vh;
 }
 
 .total {
@@ -31,4 +25,15 @@
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+	overflow-y: scroll;
+	max-height: 60vh;
+}
+
+.fillingList::-webkit-scrollbar {
+	background-color: #2F2F37;
+	width: 8px;
+}
+
+.fillingList::-webkit-scrollbar-thumb {
+	background-color: #8585AD;
 }

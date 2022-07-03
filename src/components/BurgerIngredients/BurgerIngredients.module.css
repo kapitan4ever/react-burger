@@ -3,15 +3,19 @@
 	flex-direction: column;
 	padding: 0;
 	list-style: none;
-	overflow-y: auto;
 	max-height: 80vh;
-
 }
 
-.box_tab {
+.boxTab {
 	display: flex;
 }
-
+.boxIngredients {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+	overflow-y: auto;
+}
 .items {
 	list-style: none;
 	padding: 0;
@@ -19,4 +23,13 @@
 	grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
 	row-gap: 32px;
 	position: relative;
+}
+
+.boxIngredients::-webkit-scrollbar {
+	background-color: #2F2F37;
+	width: 8px;
+}
+
+.boxIngredients::-webkit-scrollbar-thumb {
+	background-color: #8585AD;
 }
