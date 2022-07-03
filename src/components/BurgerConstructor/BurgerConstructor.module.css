@@ -1,0 +1,34 @@
+.box {
+	max-width: 600px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.list {
+	list-style-type: none;
+	max-height: 60vh;
+	overflow-y: auto;
+
+}
+
+.total {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.cost {
+	display: flex;
+	align-items: center;
+}
+
+.bunItem {
+	display: flex;
+}
+
+.fillingList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}

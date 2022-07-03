@@ -1,0 +1,22 @@
+.box {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+	overflow-y: auto;
+	max-height: 80vh;
+
+}
+
+.box_tab {
+	display: flex;
+}
+
+.items {
+	list-style: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+	row-gap: 32px;
+	position: relative;
+}
