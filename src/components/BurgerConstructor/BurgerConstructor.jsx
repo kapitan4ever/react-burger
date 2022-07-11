@@ -34,7 +34,6 @@ const BurgerConstructor = (props) => {
 		</section>
 
 	)
-
 }
 
 BurgerConstructor.propTypes = {
