@@ -3,7 +3,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	max-height: 80vh;
+	max-height: 912px;
 }
 
 .total {
@@ -36,4 +36,9 @@
 
 .fillingList::-webkit-scrollbar-thumb {
 	background-color: #8585AD;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
 }

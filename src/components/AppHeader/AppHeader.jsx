@@ -22,24 +22,24 @@ const AppHeader = () => {
 						</li>
 					</ul>
 				</nav>
-			
-			<div className={`${styleHeader.logo} mt-2 mb-2`}>
-				<Logo />
-			</div>
 
-			<div>
-				<nav className={`${styleHeader.nav} pt-4 pb-4`}>
-					<ul className={styleHeader.list}>
-						<li className={styleHeader.account}>
-							<a className={styleHeader.link} href='#'>
-								<ProfileIcon type="secondary" />
-								<p className='text text_type_main-default text_color_inactive pl-2'>Личный кабинет</p>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				<div className={`${styleHeader.logo} mt-2 mb-2`}>
+					<Logo />
+				</div>
+
+				<div>
+					<nav className={`${styleHeader.nav} pt-4 pb-4 pr-5`}>
+						<ul className={styleHeader.list}>
+							<li className={styleHeader.account}>
+								<a className={styleHeader.link} href='#'>
+									<ProfileIcon type="secondary" />
+									<p className='text text_type_main-default text_color_inactive pl-2'>Личный кабинет</p>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
-</div>
 		</header>
 	)
 }
