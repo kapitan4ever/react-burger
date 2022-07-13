@@ -9,6 +9,7 @@
 .boxTab {
 	display: flex;
 }
+
 .boxIngredients {
 	display: flex;
 	flex-direction: column;
@@ -16,6 +17,7 @@
 	list-style: none;
 	overflow-y: auto;
 }
+
 .items {
 	list-style: none;
 	padding: 0;
@@ -23,6 +25,10 @@
 	grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
 	row-gap: 32px;
 	position: relative;
+}
+
+.items>li {
+	cursor: pointer;
 }
 
 .boxIngredients::-webkit-scrollbar {
