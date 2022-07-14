@@ -1,0 +1,7 @@
+.fillingItem {
+	display: flex;
+	align-items: center;
+	column-gap: 13px;
+	box-sizing: border-box;
+	width: 100%;
+}

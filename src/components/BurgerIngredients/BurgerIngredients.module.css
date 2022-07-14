@@ -1,0 +1,41 @@
+.box {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+	max-height: 912px;
+}
+
+.boxTab {
+	display: flex;
+}
+
+.boxIngredients {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+	overflow-y: auto;
+}
+
+.items {
+	list-style: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+	row-gap: 32px;
+	position: relative;
+}
+
+.items>li {
+	cursor: pointer;
+}
+
+.boxIngredients::-webkit-scrollbar {
+	background-color: #2F2F37;
+	width: 8px;
+}
+
+.boxIngredients::-webkit-scrollbar-thumb {
+	background-color: #8585AD;
+}

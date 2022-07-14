@@ -1,0 +1,24 @@
+.popup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: auto;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.typography {
+	text-align: center;
+}
+
+.totalSum {
+	text-shadow: 0px 0px 16px #4C4CFF
+}
+
+.status {
+	background-image: url('../../images/graphics.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 120px;
+	background-size: contain;
+}

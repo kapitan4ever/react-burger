@@ -1,0 +1,51 @@
+.header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	align-items: center;
+}
+
+.nav {
+	display: flex;
+}
+
+.list {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.link {
+	color: #F2F2F3;
+	display: flex;
+	text-decoration: none;
+	align-items: center;
+}
+
+.item {
+	display: flex;
+	justify-content: center;
+}
+
+.account {
+	display: flex;
+	justify-self: flex-end;
+}
+
+.logo {
+	position: absolute;
+	margin: 0 auto;
+	align-items: center;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
