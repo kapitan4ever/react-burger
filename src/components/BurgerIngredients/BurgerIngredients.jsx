@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import { arrayOfIngredientsTypes } from "../../utils/types";
+import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = () => {
+	const ingredients = useContext(BurgerIngredientsContext);
   const [current, setCurrent] = React.useState("buns");
   return (
     <>
@@ -35,8 +36,8 @@ const BurgerIngredients = (props) => {
           <li className="mt-10">
             <h2 className="text text_type_main-medium">Булки</h2>
             <ul className={`${styles.items}`}>
-              {props.data
-                .filter((ingredient) => ingredient.type === "bun")
+              {
+                ingredients.filter((ingredient) => ingredient.type === "bun")
                 .map((ingredient) => (
                   <IngredientCard
                     ingredient={ingredient}
@@ -48,8 +49,8 @@ const BurgerIngredients = (props) => {
           <li className="mt-10">
             <h2 className="text text_type_main-medium">Соусы</h2>
             <ul className={styles.items}>
-              {props.data
-                .filter((ingredient) => ingredient.type === "sauce")
+              {
+                ingredients.filter((ingredient) => ingredient.type === "sauce")
                 .map((ingredient) => (
                   <IngredientCard
                     ingredient={ingredient}
@@ -61,8 +62,8 @@ const BurgerIngredients = (props) => {
           <li className="mt-10">
             <h2 className="text text_type_main-medium">Начинки</h2>
             <ul className={styles.items}>
-              {props.data
-                .filter((ingredient) => ingredient.type === "main")
+              {
+                ingredients.filter((ingredient) => ingredient.type === "main")
                 .map((ingredient) => (
                   <IngredientCard
                     ingredient={ingredient}
@@ -75,10 +76,6 @@ const BurgerIngredients = (props) => {
       </section>
     </>
   );
-};
-
-BurgerIngredients.propTypes = {
-  data: arrayOfIngredientsTypes,
 };
 
 export default BurgerIngredients;

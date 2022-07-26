@@ -6,6 +6,7 @@ import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
+import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 
 const App = () => {
   const [state, setState] = useState({
@@ -53,31 +54,33 @@ const App = () => {
 
   return (
     <div className={`${styleApp.app}`}>
-      <AppHeader />
-      <main className={`${styleApp.content}`}>
-        {!state.isLoading && !state.hasError && state.ingredients.length && (
-          <>
-            <BurgerIngredients data={state.ingredients} />
-            <BurgerConstructor data={state.ingredients} />
-          </>
-        )}
-        {state.isLoading && (
-          <Modal
-            isOpened={state.loadingPopup}
-            onClose={() => setState({ ...state, loadingPopup: false })}
-          >
-            <MessageModal text="Loading..." />
-          </Modal>
-        )}
-        {state.hasError && (
-          <Modal
-            isOpened={state.errorPopup}
-            onClose={() => setState({ ...state, errorPopup: false })}
-          >
-            <MessageModal text="Что-то пошло не так." />
-          </Modal>
-        )}
-      </main>
+      <BurgerIngredientsContext.Provider value={state.ingredients}>
+        <AppHeader />
+        <main className={`${styleApp.content}`}>
+          {!state.isLoading && !state.hasError && state.ingredients.length && (
+            <>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </>
+          )}
+          {state.isLoading && (
+            <Modal
+              isOpened={state.loadingPopup}
+              onClose={() => setState({ ...state, loadingPopup: false })}
+            >
+              <MessageModal text="Loading..." />
+            </Modal>
+          )}
+          {state.hasError && (
+            <Modal
+              isOpened={state.errorPopup}
+              onClose={() => setState({ ...state, errorPopup: false })}
+            >
+              <MessageModal text="Что-то пошло не так." />
+            </Modal>
+          )}
+        </main>
+      </BurgerIngredientsContext.Provider>
     </div>
   );
 };

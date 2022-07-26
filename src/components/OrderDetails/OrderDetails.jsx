@@ -2,7 +2,6 @@ import styles from "./OrderDetails.module.css";
 import PropTypes from "prop-types";
 
 const OrderDetails = ({ totalSum, id, statusInfo, waitMessage }) => {
-
   return (
     <div className={styles.popup}>
       <p
@@ -27,7 +26,7 @@ const OrderDetails = ({ totalSum, id, statusInfo, waitMessage }) => {
 };
 
 OrderDetails.propTypes = {
-  totalSum: PropTypes.string.isRequired,
+  totalSum: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   statusInfo: PropTypes.string.isRequired,
   waitMessage: PropTypes.string.isRequired,
