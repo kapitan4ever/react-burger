@@ -1,5 +1,5 @@
 import { useState, useContext, useMemo } from "react";
-import { apiPoint } from "../../utils/constants";
+import { baseUrl, checkResponse } from "../Api/api";
 import styles from "./BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -45,16 +45,14 @@ const BurgerConstructor = () => {
 
   function getOrders(ingredientsId) {
     try {
-      fetch(apiPoint, {
+      fetch(`${baseUrl}/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(ingredientsId),
       })
-        .then((res) =>
-          res.ok ? res.json() : new Error(`response status:${res.status}`)
-        )
+        .then(checkResponse)
         .then((data) => {
           setStateOrder({
             ...stateOrder,

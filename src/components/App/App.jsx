@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styleApp from "./App.module.css";
-import { api } from "../../utils/constants";
+import { baseUrl, checkResponse } from "../Api/api";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
@@ -26,11 +26,11 @@ const App = () => {
       }));
 
       try {
-        const res = await fetch(api);
+        const res = await fetch(`${baseUrl}/ingredients`);
         if (!res.ok) {
           throw new Error(`response status:${res.status}`);
         }
-        const data = await res.json();
+        const data = await checkResponse(res);
         setState((prevState) => ({
           ...prevState,
           ingredients: data.data,
