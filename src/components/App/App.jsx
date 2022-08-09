@@ -1,86 +1,65 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styleApp from "./App.module.css";
-import { baseUrl, checkResponse } from "../Api/api";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
-import BurgerIngredientsContext from "../../context/burger-ingredients-context";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredients } from "../../services/actions/ingredients";
+import {
+  closeErrorModal,
+  closeLoadingModal,
+} from "../../services/reducers/messageModal";
+
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
-  const [state, setState] = useState({
-    ingredients: [],
-    isLoading: false,
-    hasError: false,
-    errorPopup: false,
-    loadingPopup: false,
-  });
+  const dispatch = useDispatch();
+	
+  const { ingredients, isLoading, hasError } = useSelector((store) => ({
+    ingredients: store.ingredients.ingredients,
+    isLoading: store.ingredients.isLoading,
+    hasError: store.ingredients.hasError,
+  }));
 
   useEffect(() => {
-    const getData = async () => {
-      setState((prevState) => ({
-        ...prevState,
-        isLoading: true,
-        loadingPopup: true,
-      }));
+    dispatch(getIngredients());
+  }, [dispatch]);
 
-      try {
-        const res = await fetch(`${baseUrl}/ingredients`);
-        if (!res.ok) {
-          throw new Error(`response status:${res.status}`);
-        }
-        const data = await checkResponse(res);
-        setState((prevState) => ({
-          ...prevState,
-          ingredients: data.data,
-          isLoading: false,
-          loadingPopup: false,
-          errorPopup: false,
-        }));
-      } catch (error) {
-        setState((prevState) => ({
-          ...prevState,
-          isLoading: false,
-          hasError: true,
-          loadingPopup: false,
-          errorPopup: true,
-        }));
-        console.log(error);
-      }
-    };
-    getData();
-  }, []);
+	const messageModalState = useSelector(
+    (state) => state.messageModal
+  );
 
   return (
     <div className={`${styleApp.app}`}>
-      <BurgerIngredientsContext.Provider value={state.ingredients}>
-        <AppHeader />
-        <main className={`${styleApp.content}`}>
-          {!state.isLoading && !state.hasError && state.ingredients.length && (
-            <>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </>
-          )}
-          {state.isLoading && (
-            <Modal
-              isOpened={state.loadingPopup}
-              onClose={() => setState({ ...state, loadingPopup: false })}
-            >
-              <MessageModal text="Loading..." />
-            </Modal>
-          )}
-          {state.hasError && (
-            <Modal
-              isOpened={state.errorPopup}
-              onClose={() => setState({ ...state, errorPopup: false })}
-            >
-              <MessageModal text="Что-то пошло не так." />
-            </Modal>
-          )}
-        </main>
-      </BurgerIngredientsContext.Provider>
+      <AppHeader />
+      <main className={`${styleApp.content}`}>
+        {!isLoading && !hasError && ingredients.length && (
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+        )}
+        {isLoading && (
+          <Modal
+            isOpened={ messageModalState.loadingPopup }
+            onClose={() => dispatch(closeLoadingModal())}
+          >
+            <MessageModal text="Loading..." />
+          </Modal>
+        )}
+        {hasError && (
+          <Modal
+            isOpened={ messageModalState.errorPopup }
+            onClose={() => dispatch(closeErrorModal())}
+          >
+            <MessageModal text="Что-то пошло не так." />
+          </Modal>
+        )}
+      </main>
     </div>
   );
 };

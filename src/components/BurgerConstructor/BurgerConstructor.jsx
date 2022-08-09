@@ -1,5 +1,5 @@
-import { useState, useContext, useMemo } from "react";
-import { baseUrl, checkResponse } from "../Api/api";
+import { useState, useMemo } from "react";
+import { postOrder } from "../Api/api";
 import styles from "./BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -9,11 +9,19 @@ import {
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import BurgerIngredientsContext from "../../context/burger-ingredients-context";
+import { useDispatch, useSelector } from "react-redux";
+//import { getOrderDetails } from "../../services/actions/orderDetails";
 
 const BurgerConstructor = () => {
-  const ingredients = useContext(BurgerIngredientsContext);
+  const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState(false);
+	const orderId = useSelector((store) => store.orderDetails);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+
+  const ingredientIds = useMemo(
+    () => ingredients.map((item) => item._id),
+    [ingredients]
+  );
 
   const burgerIngredients = ingredients.filter(
     (ingredient) => ingredient.type !== "bun"
@@ -31,39 +39,9 @@ const BurgerConstructor = () => {
     return sumIng;
   }, [ingredients]);
 
-  const ingredientsId = useMemo(() => {
-    const obj = { ingredients: [] };
-    obj["ingredients"] = ingredients.map((item) => item._id);
-    return obj;
-  }, [ingredients]);
-
-  const [stateOrder, setStateOrder] = useState({
-    name: "",
-    order: 0,
-    success: false,
-  });
-
-  function getOrders(ingredientsId) {
-    try {
-      fetch(`${baseUrl}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ingredientsId),
-      })
-        .then(checkResponse)
-        .then((data) => {
-          setStateOrder({
-            ...stateOrder,
-            order: data.order.number,
-            success: data.success,
-          });
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const handleOrderDetailssModal = () => {
+  //   dispatch(getOrderDetails(orderId));
+  // };
 
   return (
     <section className={`${styles.box} mt-25`}>
@@ -104,18 +82,25 @@ const BurgerConstructor = () => {
           size="medium"
           onClick={() => {
             setIsOpened(true);
-            getOrders(ingredientsId);
+            dispatch(postOrder(ingredientIds));
           }}
         >
           Оформить заказ
         </Button>
         <Modal isOpened={isOpened} onClose={() => setIsOpened(false)}>
-          <OrderDetails
-            totalSum={stateOrder.order}
-            id="индентификатор заказа"
-            statusInfo="Ваш заказ начали готовить"
-            waitMessage="Дождитесь готовности на орбитальной станции"
-          />
+          {orderId.success ? (
+            <OrderDetails
+              orderId={orderId.order.number.toString()}
+              statusInfo="Ваш заказ начали готовить"
+              waitMessage="Дождитесь готовности на орбитальной станции"
+            />
+          ) : (
+            <OrderDetails
+              orderId=""
+              statusInfo="Произошла какая-то ошибка"
+              waitMessage="Попробуйте оформить заказ позже"
+            />
+          )}
         </Modal>
       </div>
     </section>

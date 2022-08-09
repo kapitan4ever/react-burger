@@ -1,18 +1,54 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import BurgerIngredientsContext from "../../context/burger-ingredients-context";
+//import BurgerIngredientsContext from "../../context/burger-ingredients-context";
+import { useInView } from "react-intersection-observer";
+import { useSelector } from "react-redux";
+import { useDrag } from "react-dnd";
 
 const BurgerIngredients = () => {
-  const ingredients = useContext(BurgerIngredientsContext);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  //const ingredients = useContext(BurgerIngredientsContext);
   const [current, setCurrent] = React.useState("buns");
+
+  const [bunRef, bunInView] = useInView({
+    threshold: 0.1,
+  });
+
+  const [sauceRef, sauceInView] = useInView({
+    threshold: 0.1,
+  });
+
+  const [mainRef, mainInView] = useInView({
+    threshold: 0.1,
+  });
+
+  const handleTabScroll = () => {
+    switch (true) {
+      case bunInView:
+        setCurrent("buns");
+        break;
+      case sauceInView:
+        setCurrent("sauces");
+        break;
+      case mainInView:
+        setCurrent("fillings");
+        break;
+			default:
+				break;
+    }
+  };
 
   const handleButtonClick = (tab) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
+
+	useEffect(() => {
+		handleTabScroll();
+	}, [bunInView, sauceInView, mainInView]);
 
   return (
     <>
@@ -44,8 +80,10 @@ const BurgerIngredients = () => {
           </Tab>
         </div>
         <ul className={styles.boxIngredients}>
-          <li className="mt-10">
-            <h2 className="text text_type_main-medium" id="buns">Булки</h2>
+          <li className="mt-10" ref={bunRef}>
+            <h2 className="text text_type_main-medium" id="buns">
+              Булки
+            </h2>
             <ul className={`${styles.items}`}>
               {ingredients
                 .filter((ingredient) => ingredient.type === "bun")
@@ -57,8 +95,10 @@ const BurgerIngredients = () => {
                 ))}
             </ul>
           </li>
-          <li className="mt-10">
-            <h2 className="text text_type_main-medium" id="sauces">Соусы</h2>
+          <li className="mt-10" ref={sauceRef}>
+            <h2 className="text text_type_main-medium" id="sauces">
+              Соусы
+            </h2>
             <ul className={styles.items}>
               {ingredients
                 .filter((ingredient) => ingredient.type === "sauce")
@@ -70,8 +110,10 @@ const BurgerIngredients = () => {
                 ))}
             </ul>
           </li>
-          <li className="mt-10">
-            <h2 className="text text_type_main-medium" id="fillings">Начинки</h2>
+          <li className="mt-10" ref={mainRef}>
+            <h2 className="text text_type_main-medium" id="fillings">
+              Начинки
+            </h2>
             <ul className={styles.items}>
               {ingredients
                 .filter((ingredient) => ingredient.type === "main")

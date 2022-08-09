@@ -5,10 +5,25 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { itemTypes } from "../../utils/types";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Modal from "../Modal/Modal";
 
+import { useDispatch, useSelector } from "react-redux";
+import {modalIngredientOpen} from '../../services/actions/ingredientModal'
+
 const IngredientCard = (props) => {
+	const dispatch = useDispatch();
+
+//   const { bun, ingridients } = useSelector(store => store.burgerConstructor);
+	
+// 	const counter = useMemo(
+// 		() => (count = 0) => {
+// 				count = (bun._id === ingridient._id && bun) ? 2 : 
+// 				ingridients.filter(ingridient => ingridient._id === ingridient._id).length
+// 				return count
+// 		}, [bun, ingridients]
+// )
+
   const [isOpened, setIsOpened] = useState(false);
   return (
     <>
@@ -17,6 +32,7 @@ const IngredientCard = (props) => {
         onClick={() => setIsOpened(true)}
       >
         <Counter count={props.ingredient._v} size="small" />
+				{/* {counter() > 0 && <Counter count={counter()} size="default" />} */}
         <img
           className="ml-4 mr-4 mb-1"
           src={props.ingredient.image}
