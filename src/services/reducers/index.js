@@ -5,6 +5,7 @@ import { constructorReducer } from './constructor';
 import { ingredientModalReducer } from './ingredientModal';
 import { messageModalReducer } from './messageModal';
 import { orderDetailsReducer } from './orderDetails';
+import { constructorIngredientsReducer } from "./constructorIngredientsReducer";
 
 export const rootReducer = combineReducers({
 	order: orderReducer,//объект созданного заказа
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
 	burgerConstructor: constructorReducer,//список всех ингредиентов в текущем конструкторе бургера
 	ingredientModal: ingredientModalReducer,//объект текущего просматриваемого ингредиента
 	messageModal: messageModalReducer,
-	orderDetails: orderDetailsReducer
+	orderDetails: orderDetailsReducer,
+	constructorIngredients: constructorIngredientsReducer,
 });
 
 

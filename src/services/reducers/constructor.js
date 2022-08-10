@@ -7,46 +7,46 @@ import {
 // Исходное состояние
 const initialState = {
   bun: [],
-  ingredients: [],
+  items: [],
 };
 // Редьюсер
 export const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTRUCTOR_ADD: {
-      if (action.payload.type === "bun") {
-        return { ...state, bun: action.payload };
+      if (action.data.type === "bun") {
+        return { ...state, bun: action.data };
       }
 			return {
 				...state,
-				ingredients: [...state.ingredients, action.payload],
+				items: [...state.items, action.data],
 			}; 
     }
     case CONSTRUCTOR_DELETE: {
       return {
         ...state,
-        ingredients: [...state.ingredients].filter(
-					(ingredient) => {
-						return ingredient.id !== action.id;
+        items: [...state.items].filter(
+					(item) => {
+						return item.id !== action.id;
 					}
 				),
       };
     }
     case CONSTRUCTOR_REPLACE: {
-			const dndConstructor = [...state.ingredients];
+			const dndConstructor = [...state.items];
 			dndConstructor.splice(
-				action.payload.dndIndex,
+				action.data.dndIndex,
 				0,
-				dndConstructor.splice(action.payload.nextIndex, 1)[0]
+				dndConstructor.splice(action.data.nextIndex, 1)[0]
 			);
       return {
         ...state,
-        ingredients: dndConstructor,
+        items: dndConstructor,
       };
     }
     case CONSTRUCTOR_RESET: {
       return {
         ...state,
-        ingredients: [],
+        items: [],
 				bun: [],
       };
     }

@@ -11,13 +11,20 @@ import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 //import { getOrderDetails } from "../../services/actions/orderDetails";
+import { useDrop } from "react-dnd";
+import {
+  addBurgerFillingAction,
+  addBurgerBunAction,
+  cleanUpConstructorAction,
+} from "../../services/reducers/constructorIngredientsReducer";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState(false);
-	const orderId = useSelector((store) => store.orderDetails);
+  const orderId = useSelector((store) => store.orderDetails);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-
+	const bun = useSelector((state) => state.constructorIngredients.bun);
+	const burgerFilling = useSelector((state) => state.constructorIngredients.filling);
   const ingredientIds = useMemo(
     () => ingredients.map((item) => item._id),
     [ingredients]
@@ -39,14 +46,30 @@ const BurgerConstructor = () => {
     return sumIng;
   }, [ingredients]);
 
-  // const handleOrderDetailssModal = () => {
-  //   dispatch(getOrderDetails(orderId));
-  // };
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "ingredients",
+    drop(item) {
+      item.type === "bun"
+        ? dispatch(addBurgerBunAction(item))
+        : dispatch(
+            addBurgerFillingAction({
+              ...item,
+              id: Math.random().toString(36).slice(2),
+              order: burgerFilling.length + 1,
+            })
+          );
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
+  const className = `${isHover ? styles.onHover : ""}`;
 
   return (
     <section className={`${styles.box} mt-25`}>
-      <ul>
+      <ul ref={dropTarget} className={`${className}`}>
         <li className={`${styles.bunItem} ml-8`}>
+				{/* {Object.keys(bun).length > 0 && ( */}
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -54,6 +77,7 @@ const BurgerConstructor = () => {
             price={oneOfBun.price}
             thumbnail={oneOfBun.image}
           />
+					{/* )} */}
         </li>
 
         <ul className={`${styles.fillingList} ml-4`}>

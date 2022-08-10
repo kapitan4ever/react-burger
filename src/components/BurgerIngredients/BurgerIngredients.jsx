@@ -1,25 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
-//import BurgerIngredientsContext from "../../context/burger-ingredients-context";
 import { useInView } from "react-intersection-observer";
-import { useSelector } from "react-redux";
-import { useDrag } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
+	const dispatch = useDispatch();
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  //const ingredients = useContext(BurgerIngredientsContext);
   const [current, setCurrent] = React.useState("buns");
 
   const [bunRef, bunInView] = useInView({
     threshold: 0.1,
   });
-
   const [sauceRef, sauceInView] = useInView({
     threshold: 0.1,
   });
-
   const [mainRef, mainInView] = useInView({
     threshold: 0.1,
   });
@@ -49,6 +45,8 @@ const BurgerIngredients = () => {
 	useEffect(() => {
 		handleTabScroll();
 	}, [bunInView, sauceInView, mainInView]);
+
+
 
   return (
     <>

@@ -4,13 +4,13 @@ import {
 	BURGER_INGREDIENTS_FAILED
 } from '../actions/ingredients';
 
-const ingredientsInitialState = {
+const initialState = {
 	ingredients: [],
 	isLoading: false,
 	hasError: false
 }
 
-export const ingredientsReduсer = (state = ingredientsInitialState, action) => {
+export const ingredientsReduсer = (state = initialState, action) => {
   switch (action.type) {
 		//запрос
     case BURGER_INGREDIENTS_REQUEST: {
