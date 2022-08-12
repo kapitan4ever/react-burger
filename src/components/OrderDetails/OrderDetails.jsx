@@ -1,17 +1,15 @@
 import styles from "./OrderDetails.module.css";
 import PropTypes from "prop-types";
-
-const OrderDetails = ({ totalSum, id, statusInfo, waitMessage }) => {
-
+export default function OrderDetails({ orderId, statusInfo, waitMessage }) {
   return (
     <div className={styles.popup}>
       <p
         className={`${styles.typography} ${styles.totalSum} mt-30 mb-8 text text_type_digits-large`}
       >
-        {totalSum}
+        {orderId}
       </p>
       <h2 className={`${styles.typography} text text_type_main-medium`}>
-        {id}
+        идентификатор заказа
       </h2>
       <div className={`${styles.status} mt-15 mb-15`}></div>
       <p className={`${styles.typography} text text_type_main-default`}>
@@ -24,13 +22,10 @@ const OrderDetails = ({ totalSum, id, statusInfo, waitMessage }) => {
       </p>
     </div>
   );
-};
+}
 
 OrderDetails.propTypes = {
-  totalSum: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  orderId: PropTypes.string.isRequired,
   statusInfo: PropTypes.string.isRequired,
   waitMessage: PropTypes.string.isRequired,
 };
-
-export default OrderDetails;

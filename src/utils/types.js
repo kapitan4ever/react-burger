@@ -13,10 +13,6 @@ const ingredientTypes = {
   type: PropTypes.string.isRequired,
   __v: PropTypes.number.isRequired,
   _id: PropTypes.string.isRequired,
-	// totalSum: PropTypes.string.isRequired,
-  // id: PropTypes.string.isRequired,
-  // statusInfo: PropTypes.string.isRequired,
-	// waitMessage: PropTypes.string.isRequired,
 };
 
 export const itemTypes = PropTypes.shape(ingredientTypes).isRequired;

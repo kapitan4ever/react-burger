@@ -27,6 +27,7 @@
 	padding: 0;
 	overflow-y: scroll;
 	max-height: 60vh;
+	min-height: 100px;
 }
 
 .fillingList::-webkit-scrollbar {
@@ -41,4 +42,9 @@
 ul {
 	padding: 0;
 	margin: 0;
+}
+
+.isHover {
+	border: 2px solid lightblue;
+	border-radius: 50px;
 }
