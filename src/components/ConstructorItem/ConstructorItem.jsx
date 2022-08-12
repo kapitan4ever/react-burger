@@ -7,7 +7,7 @@ import { itemTypes } from "../../utils/types";
 import {
   deleteBurgerFilling,
   replaceBurgerFilling,
-} from "../../services/reducers/constructorIngredientsReducer";
+} from "../../services/actions/constructBurger";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";

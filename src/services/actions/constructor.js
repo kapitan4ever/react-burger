@@ -10,7 +10,7 @@ export const addToConstructor = (ingredient) => {
     type: CONSTRUCTOR_ADD,
     payload: {
       ...ingredient,
-      id: nanoid(),
+			id: nanoid(),
     },
   };
 };

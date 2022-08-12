@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { postOrder } from "../Api/api";
+import { postOrder } from "../../services/actions/orderDetails";
 import styles from "./BurgerConstructor.module.css";
 import {
   ConstructorElement,
@@ -15,9 +15,10 @@ import {
   addBurgerFillingAction,
   addBurgerBunAction,
   eraseConstructorAction,
-} from "../../services/reducers/constructorIngredientsReducer";
+} from "../../services/actions/constructBurger";
 import { nanoid } from "nanoid";
 import { itemTypes } from "../../utils/types";
+import { addToConstructor } from "../../services/actions/constructor";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const BurgerConstructor = () => {
           {filling.map((ingredient, index) => (
             <ConstructorItem
               data={ingredient}
-              key={ingredient._id}
+              key={ingredient.id}
               index={index}
             />
           ))}
@@ -105,7 +106,7 @@ const BurgerConstructor = () => {
           onClick={() => {
             setIsOpened(true);
             dispatch(postOrder(ingredientIds));
-            eraseConstructorAction();
+            //eraseConstructorAction();
           }}
           disabled={
             (Object.keys(bun).length > 0) | (Object.keys(filling).length > 0)

@@ -47,24 +47,4 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
   }
 };
 
-export const addBurgerFillingAction = (payload) => ({
-  type: ADD_BURGER_FILLING,
-  payload,
-});
-export const addBurgerBunAction = (payload) => ({
-  type: ADD_BURGER_BUN,
-  payload,
-});
-export const deleteBurgerFilling = (payload) => ({
-  type: DELETE_BURGER_FILLING,
-  payload,
-});
 
-export const replaceBurgerFilling = (payload) => ({
-  type: REPLACE_BURGER_FILLING,
-  payload,
-});
-
-export const eraseConstructorAction = () => ({
-  type: ERASE_CONSTRUCTOR,
-});

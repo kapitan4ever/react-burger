@@ -21,7 +21,4 @@ export const orderDetailsReducer = (state = defaultState, action) => {
   }
 };
 
-export const orderDetailsAction = (payload) => ({
-  type: GET_ORDER_DETAILS,
-  payload,
-});
+
