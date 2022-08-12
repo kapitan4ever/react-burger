@@ -29,7 +29,7 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
       dragFilling.splice(
         action.payload.dragIndex,
         0,
-        dragFilling.splice(action.payload.dropIndex, 1)[0]
+        dragFilling.splice(action.payload.hoverIndex, 1)[0]
       );
 
       return {
@@ -55,16 +55,16 @@ export const addBurgerBunAction = (payload) => ({
   type: ADD_BURGER_BUN,
   payload,
 });
-export const deleteBurgerStuffing = (payload) => ({
+export const deleteBurgerFilling = (payload) => ({
   type: DELETE_BURGER_FILLING,
   payload,
 });
 
-export const replaceBurgerStuffing = (payload) => ({
+export const replaceBurgerFilling = (payload) => ({
   type: REPLACE_BURGER_FILLING,
   payload,
 });
 
-export const cleanUpConstructorAction = () => ({
+export const eraseConstructorAction = () => ({
   type: ERASE_CONSTRUCTOR,
 });

@@ -1,4 +1,4 @@
-import {orderDetailsAction} from '../../services/reducers/orderDetails'
+import { orderDetailsAction } from "../../services/reducers/orderDetails";
 export const baseUrl = "https://norma.nomoreparties.space/api/";
 
 export const checkResponse = (res) => {
@@ -10,14 +10,14 @@ export const checkResponse = (res) => {
 };
 
 export const getIngredientsData = async () => {
-	const res = await fetch(`${baseUrl}ingredients`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
-	return checkResponse(res);
-}
+  const res = await fetch(`${baseUrl}ingredients`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return checkResponse(res);
+};
 
 export const postOrder = (orderId) => {
   return function (dispatch) {

@@ -1,18 +1,18 @@
 import {
-	BURGER_INGREDIENTS_REQUEST,
-	BURGER_INGREDIENTS_SUCCESS,
-	BURGER_INGREDIENTS_FAILED
-} from '../actions/ingredients';
+  BURGER_INGREDIENTS_REQUEST,
+  BURGER_INGREDIENTS_SUCCESS,
+  BURGER_INGREDIENTS_FAILED,
+} from "../actions/ingredients";
 
 const initialState = {
-	ingredients: [],
-	isLoading: false,
-	hasError: false
-}
+  ingredients: [],
+  isLoading: false,
+  hasError: false,
+};
 
 export const ingredientsReduсer = (state = initialState, action) => {
   switch (action.type) {
-		//запрос
+    //запрос
     case BURGER_INGREDIENTS_REQUEST: {
       return {
         ...state,
@@ -20,7 +20,7 @@ export const ingredientsReduсer = (state = initialState, action) => {
         hasError: false,
       };
     }
-		//успех
+    //успех
     case BURGER_INGREDIENTS_SUCCESS: {
       return {
         ...state,
@@ -29,7 +29,7 @@ export const ingredientsReduсer = (state = initialState, action) => {
         hasError: false,
       };
     }
-		//провал
+    //провал
     case BURGER_INGREDIENTS_FAILED: {
       return {
         ...state,

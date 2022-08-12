@@ -18,7 +18,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
   const dispatch = useDispatch();
-	
+
   const { ingredients, isLoading, hasError } = useSelector((store) => ({
     ingredients: store.ingredients.ingredients,
     isLoading: store.ingredients.isLoading,
@@ -29,9 +29,7 @@ const App = () => {
     dispatch(getIngredients());
   }, [dispatch]);
 
-	const messageModalState = useSelector(
-    (state) => state.messageModal
-  );
+  const messageModalState = useSelector((state) => state.messageModal);
 
   return (
     <div className={`${styleApp.app}`}>
@@ -45,7 +43,7 @@ const App = () => {
         )}
         {isLoading && (
           <Modal
-            isOpened={ messageModalState.loadingPopup }
+            isOpened={messageModalState.loadingPopup}
             onClose={() => dispatch(closeLoadingModal())}
           >
             <MessageModal text="Loading..." />
@@ -53,7 +51,7 @@ const App = () => {
         )}
         {hasError && (
           <Modal
-            isOpened={ messageModalState.errorPopup }
+            isOpened={messageModalState.errorPopup}
             onClose={() => dispatch(closeErrorModal())}
           >
             <MessageModal text="Что-то пошло не так." />

@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const [current, setCurrent] = React.useState("buns");
 
@@ -31,8 +31,8 @@ const BurgerIngredients = () => {
       case mainInView:
         setCurrent("fillings");
         break;
-			default:
-				break;
+      default:
+        break;
     }
   };
 
@@ -42,11 +42,9 @@ const BurgerIngredients = () => {
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
-	useEffect(() => {
-		handleTabScroll();
-	}, [bunInView, sauceInView, mainInView]);
-
-
+  useEffect(() => {
+    handleTabScroll();
+  }, [bunInView, sauceInView, mainInView]);
 
   return (
     <>

@@ -7,47 +7,42 @@ import { itemTypes } from "../../utils/types";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/Modal";
-
 import { useDispatch, useSelector } from "react-redux";
-import { modalIngredientOpen } from '../../services/actions/ingredientModal'
-import { useDrag } from 'react-dnd';
+import { useDrag } from "react-dnd";
 
 const IngredientCard = (props) => {
-	const { ingredient } = useSelector((state) => state.ingredients);
-	//const { bun, filling } = useSelector((state) => state.constructorIngredients);
-	//console.log(props.ingredient)
-	const dispatch = useDispatch();
+  const bun = useSelector((state) => state.constructorIngredients.bun);
+  const filling = useSelector((state) => state.constructorIngredients.filling);
+  const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState(false);
 
-	const [{ opacity }, ref] = useDrag({
-    type: 'ingredients',
+  const [{ opacity }, ref] = useDrag({
+    type: "ingredients",
     item: props.ingredient,
-    collect: monitor => ({
-      opacity: monitor.isDragging() ? 0.5 : 1
-    })
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
   });
 
-	// const counter = useMemo(
-  //   () =>
-  //     (count = 0) => {
-  //       for (let { _id } of filling ) if (_id === props.ingredient._id) count++;
-  //       if (bun && bun._id === props.ingredient._id) return 2;
-  //       return count;
-  //     },
-  //   [bun, filling , props.ingredient._id]
-  // );
+  const counter = useMemo(
+    () =>
+      (count = 0) => {
+        for (let { _id } of filling) if (_id === props.ingredient._id) count++;
+        if (bun && bun._id === props.ingredient._id) return 2;
+        return count;
+      },
+    [bun, filling, props.ingredient._id]
+  );
 
   return (
     <>
       <li
         className={`${styles.item} mt-6 ml-4`}
         onClick={() => setIsOpened(true)}
-				ref={ref}
-				style={{ opacity }}
+        ref={ref}
+        style={{ opacity }}
       >
-				{/* <Counter count={counter()} size="small" /> */}
-				
-				{/* {counter() > 0 && <Counter count={counter()} size="small" />} */}
+        {counter() > 0 && <Counter count={counter()} size="small" />}
         <img
           className="ml-4 mr-4 mb-1"
           src={props.ingredient.image}
@@ -62,7 +57,6 @@ const IngredientCard = (props) => {
         <p className={`${styles.title} text text_type_main-default mt-1`}>
           {props.ingredient.name}
         </p>
-				<Counter count={props.ingredient._v} size="small" />
       </li>
       <Modal isOpened={isOpened} onClose={() => setIsOpened(false)}>
         <IngredientDetails
