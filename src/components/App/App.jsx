@@ -16,6 +16,15 @@ import {
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  LoginPage,
+  Register,
+  ForgotPassword,
+  ResetPassword,
+  Error404,
+} from "../../pages";
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -34,30 +43,51 @@ const App = () => {
   return (
     <div className={`${styleApp.app}`}>
       <AppHeader />
-      <main className={`${styleApp.content}`}>
-        {!isLoading && !hasError && ingredients.length && (
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-        )}
-        {isLoading && (
-          <Modal
-            isOpened={messageModalState.loadingPopup}
-            onClose={() => dispatch(closeLoadingModal())}
-          >
-            <MessageModal text="Loading..." />
-          </Modal>
-        )}
-        {hasError && (
-          <Modal
-            isOpened={messageModalState.errorPopup}
-            onClose={() => dispatch(closeErrorModal())}
-          >
-            <MessageModal text="Что-то пошло не так." />
-          </Modal>
-        )}
-      </main>
+      <Router>
+        <Switch>
+          <Route path="/" exact={true}>
+            <main className={`${styleApp.content}`}>
+              {!isLoading && !hasError && ingredients.length && (
+                <DndProvider backend={HTML5Backend}>
+                  <BurgerIngredients />
+                  <BurgerConstructor />
+                </DndProvider>
+              )}
+              {isLoading && (
+                <Modal
+                  isOpened={messageModalState.loadingPopup}
+                  onClose={() => dispatch(closeLoadingModal())}
+                >
+                  <MessageModal text="Loading..." />
+                </Modal>
+              )}
+              {hasError && (
+                <Modal
+                  isOpened={messageModalState.errorPopup}
+                  onClose={() => dispatch(closeErrorModal())}
+                >
+                  <MessageModal text="Что-то пошло не так." />
+                </Modal>
+              )}
+            </main>
+          </Route>
+          <Route path="/login" exact={true}>
+            <LoginPage />
+          </Route>
+          <Route path="/register" exact={true}>
+            <Register />
+          </Route>
+          <Route path="/forgot-password" exact={true}>
+            <ForgotPassword />
+          </Route>
+          <Route path="/reset-password" exact={true}>
+            <ResetPassword />
+          </Route>
+          <Route>
+            <Error404 />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

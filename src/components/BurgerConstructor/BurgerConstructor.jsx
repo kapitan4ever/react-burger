@@ -14,7 +14,6 @@ import { useDrop } from "react-dnd";
 import {
   addBurgerFillingAction,
   addBurgerBunAction,
-  eraseConstructorAction,
 } from "../../services/actions/constructBurger";
 import { nanoid } from "nanoid";
 import { itemTypes } from "../../utils/types";
@@ -106,7 +105,6 @@ const BurgerConstructor = () => {
           onClick={() => {
             setIsOpened(true);
             dispatch(postOrder(ingredientIds));
-            //eraseConstructorAction();
           }}
           disabled={
             (Object.keys(bun).length > 0) | (Object.keys(filling).length > 0)

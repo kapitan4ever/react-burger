@@ -36,10 +36,7 @@
 	justify-content: center;
 }
 
-.account {
-	display: flex;
-	justify-self: flex-end;
-}
+
 
 .logo {
 	position: absolute;
