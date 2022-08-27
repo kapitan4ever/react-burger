@@ -1,20 +1,14 @@
 .header {
 	width: 100%;
-	display: flex;
-	align-items: center;
+	max-width: 1920px;
+	min-height: 88px;
 }
 
 .wrapper {
-	display: flex;
-	justify-content: space-between;
 	width: 100%;
 	max-width: 1280px;
+	min-height: 88px;
 	margin: 0 auto;
-	align-items: center;
-}
-
-.nav {
-	display: flex;
 }
 
 .list {
@@ -22,10 +16,11 @@
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	align-items: center;
 }
 
 .link {
-	color: #F2F2F3;
+	color: #8585AD;
 	display: flex;
 	text-decoration: none;
 	align-items: center;
@@ -34,15 +29,19 @@
 .item {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
+.feed {
+	composes: item;
+	margin-right: 112px;
+}
 
+.account {
+	composes: item;
+	margin-left: 290px;
+}
 
-.logo {
-	position: absolute;
-	margin: 0 auto;
-	align-items: center;
-	left: 0;
-	right: 0;
-	text-align: center;
+.activeLink {
+	color: #F2F2F3;
 }

@@ -17,11 +17,13 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import {
   LoginPage,
   Register,
   ForgotPassword,
   ResetPassword,
+  ProfilePage,
   Error404,
 } from "../../pages";
 
@@ -42,10 +44,11 @@ const App = () => {
 
   return (
     <div className={`${styleApp.app}`}>
+			<Router>
       <AppHeader />
-      <Router>
+      
         <Switch>
-          <Route path="/" exact={true}>
+          <ProtectedRoute path="/" exact={true}>
             <main className={`${styleApp.content}`}>
               {!isLoading && !hasError && ingredients.length && (
                 <DndProvider backend={HTML5Backend}>
@@ -70,18 +73,21 @@ const App = () => {
                 </Modal>
               )}
             </main>
-          </Route>
-          <Route path="/login" exact={true}>
+          </ProtectedRoute>
+          <Route path="/login" exact>
             <LoginPage />
           </Route>
-          <Route path="/register" exact={true}>
+          <Route path="/register" exact>
             <Register />
           </Route>
-          <Route path="/forgot-password" exact={true}>
+          <Route path="/forgot-password" exact>
             <ForgotPassword />
           </Route>
-          <Route path="/reset-password" exact={true}>
+          <Route path="/reset-password" exact>
             <ResetPassword />
+          </Route>
+          <Route path="/profile" exact>
+            <ProfilePage />
           </Route>
           <Route>
             <Error404 />
