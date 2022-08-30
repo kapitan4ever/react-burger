@@ -3,6 +3,7 @@ import styleApp from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
 
@@ -23,9 +24,10 @@ import {
   Register,
   ForgotPassword,
   ResetPassword,
-  ProfilePage,
+	OrdersPage,
   Error404,
 } from "../../pages";
+import ProfileContainer from "../ProfileContainer/ProfileContainer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,11 +46,11 @@ const App = () => {
 
   return (
     <div className={`${styleApp.app}`}>
-			<Router>
-      <AppHeader />
-      
+      <Router>
+        <AppHeader />
+
         <Switch>
-          <ProtectedRoute path="/" exact={true}>
+          <Route path="/" exact={true}>
             <main className={`${styleApp.content}`}>
               {!isLoading && !hasError && ingredients.length && (
                 <DndProvider backend={HTML5Backend}>
@@ -73,7 +75,10 @@ const App = () => {
                 </Modal>
               )}
             </main>
-          </ProtectedRoute>
+          </Route>
+					<Route path="/profile" exact>
+          	<ProfileContainer />
+					</Route>
           <Route path="/login" exact>
             <LoginPage />
           </Route>
@@ -85,9 +90,6 @@ const App = () => {
           </Route>
           <Route path="/reset-password" exact>
             <ResetPassword />
-          </Route>
-          <Route path="/profile" exact>
-            <ProfilePage />
           </Route>
           <Route>
             <Error404 />

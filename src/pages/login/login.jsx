@@ -8,12 +8,12 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useAuth } from '../../services/actions/auth';
+//import { useAuth } from '../../services/actions/auth';
 import { Link } from "react-router-dom";
 
-export function LoginPage() {
+export default function LoginPage() {
 	let history = useHistory();
-  let auth = useAuth();
+  //let auth = useAuth();
 
   const [value, setValue] = useState({ email: "", password: "" });
 
@@ -21,15 +21,15 @@ export function LoginPage() {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-	let login = useCallback(
-    e => {
-      e.preventDefault();
-      auth.signIn(() => {
-        history.replace({ pathname: '/' });
-      });
-    },
-    [auth, history]
-  );
+	// let login = useCallback(
+  //   e => {
+  //     e.preventDefault();
+  //     auth.signIn(() => {
+  //       history.replace({ pathname: '/' });
+  //     });
+  //   },
+  //   [auth, history]
+  // );
 
 	// if (auth.user) {
   //   return (<Redirect to={{ pathname: '/' }} />);
@@ -53,7 +53,7 @@ export function LoginPage() {
             name="password"
           />
         </div>
-        <Button onClick={login} type="primary" size="medium">
+        <Button type="primary" size="medium">
           Войти
         </Button>
       </form>

@@ -20,8 +20,8 @@ export const getIngredientsData = async () => {
 };
 
 //запрос к эндпоинту fogot-password
-export const fogotPasswordRequest = async (email) => {
-  return await fetch(`${baseUrl}fogot-password`, {
+export const forgotPasswordRequest = async (email) => {
+  return await fetch(`${baseUrl}forgot-password`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
