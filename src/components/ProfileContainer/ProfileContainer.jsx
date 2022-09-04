@@ -1,8 +1,16 @@
 import { NavLink, Switch, Route } from "react-router-dom";
 import { ProfilePage, OrdersPage } from "../../pages";
 import styles from "./profileContainer.module.css";
+import { useDispatch } from 'react-redux';
+import {signOut} from '../../services/actions/auth';
 
 export default function ProfileContainer() {
+	const dispatch = useDispatch();
+
+	function handleSingOut() {
+		dispatch(signOut());
+	};
+  //add Redirect to /login
   return (
     <div className={`${styles.content} mt-30`}>
       <nav className={`${styles.menu} mr-15`}>
@@ -15,7 +23,7 @@ export default function ProfileContainer() {
           Профиль
         </NavLink>
         <NavLink
-          to="/orders"
+          to="/profile/orders"
           exact
           className={`${styles.link} text text_type_main-medium text_color_inactive`}
           activeClassName={`${styles.activeLink} text text_type_main-medium`}
@@ -23,10 +31,11 @@ export default function ProfileContainer() {
           История заказов
         </NavLink>
         <NavLink
-          to="/logOut"
+          to="/login"
           exact
           className={`${styles.link} text text_type_main-medium text_color_inactive`}
           activeClassName={`${styles.activeLink} text text_type_main-medium`}
+					onClick={handleSingOut}
         >
           Выход
         </NavLink>
@@ -35,7 +44,7 @@ export default function ProfileContainer() {
         </span>
       </nav>
       <Switch>
-				<Route path="profile/orders" exact><OrdersPage /></Route>
+				<Route path="/profile/orders" exact><OrdersPage /></Route>
         <Route path="/profile" exact><ProfilePage /></Route>
       </Switch>
     </div>

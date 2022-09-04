@@ -21,7 +21,7 @@ export const getIngredientsData = async () => {
 
 //запрос к эндпоинту fogot-password
 export const forgotPasswordRequest = async (email) => {
-  return await fetch(`${baseUrl}forgot-password`, {
+  return await fetch(`${baseUrl}password-reset`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -38,7 +38,7 @@ export const forgotPasswordRequest = async (email) => {
 };
 //запрос к эндпоинту reset-password
 export const resetPasswordRequest = async (password, token) => {
-  return await fetch(`${baseUrl}reset-password/reset`, {
+  return await fetch(`${baseUrl}password-reset/reset`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -55,12 +55,9 @@ export const resetPasswordRequest = async (password, token) => {
   }).then(checkResponse);
 };
 //запрос к эндпоинту auth/register для создания пользователя
-export const userRequest = async (email, password, name) => {
+export const registerUserRequest = async (email, password, name) => {
   return await fetch(`${baseUrl}auth/register`, {
     method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
     },
@@ -88,25 +85,6 @@ export const loginRequest = async (email, password) => {
     body: JSON.stringify({
       email,
       password,
-    }),
-  }).then(checkResponse);
-};
-//запрос к эндпоинту auth/register
-export const registerRequest = async (email, password, name) => {
-  return await fetch(`${baseUrl}auth/register`, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify({
-      email,
-      password,
-			name,
     }),
   }).then(checkResponse);
 };

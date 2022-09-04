@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import styles from "./register.module.css";
 import {
   Button,
@@ -7,21 +5,32 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useLocation, Redirect } from "react-router-dom";
+import {
+  registerUser,
+  setRegisterFormValue,
+} from "../../services/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 export function Register() {
-  const [value, setValue] = useState({
-    email: "",
-    name: "",
-    password: "",
-  });
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { isLogin } = useSelector((state) => state.auth);
+  const { email, password, name } = useSelector((state) => state.auth.form);
+
   const onInputChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
+    dispatch(setRegisterFormValue(e.target.name, e.target.value));
   };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-	}
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(email, password, name));
+  };
+
+  if (isLogin) {
+    return <Redirect to={location.state?.from || "/"} />;
+  }
+
   return (
     <div className={styles.wrapper}>
       <h2 className={`text text_type_main-medium mb-6`}>Регистрация</h2>
@@ -31,7 +40,7 @@ export function Register() {
             type={"text"}
             placeholder={"Имя"}
             onChange={onInputChange}
-            value={value.name}
+            value={name}
             name={"name"}
             error={false}
             errorText={"Ошибка"}
@@ -39,11 +48,11 @@ export function Register() {
           />
         </div>
         <div className={`${styles.form__input} mb-6`}>
-          <Input
+          <EmailInput
             type={"email"}
             placeholder={"E-mail"}
             onChange={onInputChange}
-            value={value.email}
+            value={email}
             name={"email"}
             error={false}
             errorText={"Ошибка"}
@@ -53,11 +62,15 @@ export function Register() {
         <div className={`${styles.form__input} mb-6`}>
           <PasswordInput
             onChange={onInputChange}
-            value={value.password}
+            value={password}
             name={"password"}
           />
         </div>
-        <Button type="primary" size="medium">
+        <Button
+          type="primary"
+          size="medium"
+          disabled={!(name && email && password)}
+        >
           Зарегистрироваться
         </Button>
       </form>

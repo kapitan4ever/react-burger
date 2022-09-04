@@ -1,50 +1,15 @@
-// import { useAuth } from '../services/auth';
-// import { Route } from 'react-router-dom';
-// import { useEffect, useState } from 'react';
-
-// export function ProtectedRoute({ children, ...rest }) {
-//     let { getUser, ...auth } = useAuth();
-//     const [isUserLoaded, setUserLoaded] = useState(false);
-
-//     const init = async () => {
-//     await getUser();
-//     setUserLoaded(true);
-//   };
-
-//   useEffect(() => {
-//     init();
-//   }, []);
-
-//     if (!isUserLoaded) {
-//     return null;
-//   }
-
-//     return (
-//     <Route
-//       {...rest}
-//       render={() =>
-//         auth.user ? (
-//           children
-//         ) : (
-//                     // Если пользователя нет в хранилище, происходит переадресация на роут /login
-//                     <Redirect
-//                         to='/login'
-//           />
-//                 )
-//       }
-//     />
-//   );
-// }
-
-
-import { Route } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
+import { getCookie } from '../../services/utils';
 
 export function ProtectedRoute({ children, ...rest }) {
+	const cookie = getCookie('token');
+	const location = useLocation();
+	
   return (
     <Route
       {...rest}
       render={() => (
-          children
+          cookie ? (children) : (<Redirect to={{ pathname: '/login', state: { from: location}}} />)
         )
       }
     />

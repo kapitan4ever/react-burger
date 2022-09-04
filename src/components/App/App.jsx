@@ -3,6 +3,7 @@ import styleApp from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
+import ProfileContainer from "../ProfileContainer/ProfileContainer";
 
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
@@ -24,10 +25,9 @@ import {
   Register,
   ForgotPassword,
   ResetPassword,
-	OrdersPage,
   Error404,
 } from "../../pages";
-import ProfileContainer from "../ProfileContainer/ProfileContainer";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -76,9 +76,9 @@ const App = () => {
               )}
             </main>
           </Route>
-					<Route path="/profile" exact>
+					<ProtectedRoute path="/profile">
           	<ProfileContainer />
-					</Route>
+					</ProtectedRoute>
           <Route path="/login" exact>
             <LoginPage />
           </Route>

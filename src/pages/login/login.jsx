@@ -1,59 +1,47 @@
-import React, { useCallback, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
-
 import styles from "./login.module.css";
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useLocation, Redirect } from "react-router-dom";
+import { signIn, setLoginFormValue } from "../../services/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
-//import { useAuth } from '../../services/actions/auth';
-import { Link } from "react-router-dom";
-
-export default function LoginPage() {
-	let history = useHistory();
-  //let auth = useAuth();
-
-  const [value, setValue] = useState({ email: "", password: "" });
+export function LoginPage() {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { email, password } = useSelector((state) => state.auth.form);
+  const { isLogin } = useSelector((state) => state.auth);
 
   const onInputChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
+    dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 
-	// let login = useCallback(
-  //   e => {
-  //     e.preventDefault();
-  //     auth.signIn(() => {
-  //       history.replace({ pathname: '/' });
-  //     });
-  //   },
-  //   [auth, history]
-  // );
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signIn(email, password));
+  };
 
-	// if (auth.user) {
-  //   return (<Redirect to={{ pathname: '/' }} />);
-  // }
+  if (isLogin) {
+    return <Redirect to={location.state?.from || "/"} />;
+  }
 
   return (
     <div className={styles.wrapper}>
       <h2 className={`text text_type_main-medium mb-6`}>Вход</h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onFormSubmit}>
         <div className={`${styles.form__input} mb-6`}>
-          <EmailInput
-            value={value.email}
-            onChange={onInputChange}
-            name="email"
-          />
+          <EmailInput value={email} onChange={onInputChange} name={"email"} />
         </div>
         <div className={`${styles.form__input} mb-6`}>
           <PasswordInput
-            value={value.password}
+            value={password}
             onChange={onInputChange}
-            name="password"
+            name={"password"}
           />
         </div>
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" disabled={!(email && password)}>
           Войти
         </Button>
       </form>

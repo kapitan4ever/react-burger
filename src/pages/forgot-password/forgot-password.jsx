@@ -4,27 +4,43 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
+import { forgotPassword } from "../../services/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "../../services/utils";
 
 export function ForgotPassword() {
-  const [value, setValue] = useState({
-    email: "",
-  });
-  const onInputChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
+	const dispatch = useDispatch();
+  const location = useLocation();
+	const { isLogin } = useSelector((state) => state.auth);
+	//const { email } = useSelector((state) => state.auth.form);
+  const [email, setEmail] = useState('');
+	const token = getCookie('token');
+	const {forgotPassSuccess} = useSelector(state => state.auth);
+ 	const onInputChange = e => {
+    dispatch(setEmail(e.target.value));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(forgotPassword({email}));
+  };
+
+	if (isLogin) {
+    return <Redirect to={location.state?.from || "/"} />;
+  }
   return (
     <div className={styles.wrapper}>
       <h2 className={`text text_type_main-medium mb-6`}>
         Восстановление пароля
       </h2>
-      <form className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={`${styles.form__input} mb-6`}>
           <Input
             type={"email"}
             placeholder={"Укажите e-mail"}
             onChange={onInputChange}
-            value={value.email}
+            value={email}
             name={"email"}
             error={false}
             errorText={"Ошибка"}
@@ -32,6 +48,10 @@ export function ForgotPassword() {
           />
         </div>
         <Button type="primary" size="medium">
+					{!!forgotPassSuccess
+					? (<Redirect to="/reset-password" />)
+				: ''
+				}
           Восстановить
         </Button>
       </form>
