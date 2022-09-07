@@ -67,3 +67,20 @@
 	text-decoration: none;
  }
 
+ .name {
+	text-align: center;
+}
+
+.details {
+	padding: 0;
+	margin-top: 0;
+	display: flex;
+	column-gap: 20px;
+	list-style: none;
+	justify-content: center;
+}
+
+.detail {
+	text-align: center;
+}
+

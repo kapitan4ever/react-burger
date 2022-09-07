@@ -41,10 +41,10 @@ const Modal = ({ children, isOpened, onClose }) => {
   );
 };
 
-Modal.propTypes = {
-  children: PropTypes.element.isRequired,
-  isOpened: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
+// Modal.propTypes = {
+//   children: PropTypes.element.isRequired,
+//   isOpened: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+// };
 
 export default Modal;

@@ -30,7 +30,7 @@ const AppHeader = () => {
             </li>
 
             <li>
-              <Link to="/" exact>
+              <Link to="/" >
                 <Logo />
               </Link>
             </li>

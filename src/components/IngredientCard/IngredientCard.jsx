@@ -7,14 +7,16 @@ import { itemTypes } from "../../utils/types";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState, useMemo } from "react";
 import Modal from "../Modal/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from "react-router-dom";
 
 const IngredientCard = (props) => {
   const bun = useSelector((state) => state.constructorIngredients.bun);
   const filling = useSelector((state) => state.constructorIngredients.filling);
-  const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState(false);
+  const location = useLocation();
+  const { image, name, price } = props.ingredient;
 
   const [{ opacity }, ref] = useDrag({
     type: "ingredients",
@@ -38,24 +40,26 @@ const IngredientCard = (props) => {
     <>
       <li
         className={`${styles.item} mt-6 ml-4`}
-        onClick={() => setIsOpened(true)}
         ref={ref}
         style={{ opacity }}
+        onClick={() => setIsOpened(true)}
       >
         {counter() > 0 && <Counter count={counter()} size="small" />}
-        <img
-          className="ml-4 mr-4 mb-1"
-          src={props.ingredient.image}
-          alt={props.ingredient.name}
-        />
+        <Link
+          to={{
+            pathname: `/ingredients/${props.ingredient._id}`,
+            state: { background: location },
+          }}
+        >
+          <img className="ml-4 mr-4 mb-1" src={image} alt={name} />
+        </Link>
+
         <div className={styles.price}>
-          <p className="text text_type_digits-default mr-2">
-            {props.ingredient.price}
-          </p>
+          <p className="text text_type_digits-default mr-2">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <p className={`${styles.title} text text_type_main-default mt-1`}>
-          {props.ingredient.name}
+          {name}
         </p>
       </li>
       <Modal isOpened={isOpened} onClose={() => setIsOpened(false)}>
