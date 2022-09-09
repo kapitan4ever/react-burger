@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 import { rootReducer } from "./services/reducers";
 import {
   BrowserRouter as Router,
+  // @ts-ignore
 } from "react-router-dom";
 
 const store = createStore(

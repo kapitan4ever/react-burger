@@ -29,7 +29,6 @@ const BurgerConstructor = () => {
   const bun = useSelector((state) => state.constructorIngredients.bun);
   const filling = useSelector((state) => state.constructorIngredients.filling);
 	const cookie = getCookie('token');
-	//const { isLogin } = useSelector(store => store.auth)
   const ingredientIds = useMemo(
     () => [...filling.map((item) => item._id), bun._id, bun._id],
     [filling, bun]

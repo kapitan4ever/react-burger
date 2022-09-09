@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "../../services/utils";
 
 export function ForgotPassword() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const location = useLocation();
-  const [email, setEmail] = useState('');
-	const cookie = getCookie('token');
-	const {forgotPasswordSuccess} = useSelector(state => state.auth);
- 	const onInputChange = e => {
+  const [email, setEmail] = useState("");
+  const cookie = getCookie("token");
+  const { forgotPasswordSuccess } = useSelector((state) => state.auth);
+  const onInputChange = (e) => {
     setEmail(e.target.value);
   };
 
@@ -24,7 +24,7 @@ export function ForgotPassword() {
     dispatch(forgotPassword(email));
   };
 
-	if (cookie) {
+  if (cookie) {
     return <Redirect to={location.state?.from || "/"} />;
   }
   return (
@@ -46,10 +46,7 @@ export function ForgotPassword() {
           />
         </div>
         <Button type="primary" size="medium">
-					{!!forgotPasswordSuccess
-					? (<Redirect to="/reset-password" />)
-				: ''
-				}
+          {!!forgotPasswordSuccess ? <Redirect to="/reset-password" /> : ""}
           Восстановить
         </Button>
       </form>

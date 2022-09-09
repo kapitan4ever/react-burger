@@ -5,12 +5,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { singOut, updateUser } from "../../services/actions/auth";
+import { updateUser } from "../../services/actions/auth";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
-  //const {isLogin} = useSelector(state => state.auth);
-  //const {name, email, password} = useSelector(state => state.auth.form);
   const { email, name } = useSelector((state) => state.auth.user);
   const [form, setForm] = useState({
     email: email,

@@ -14,7 +14,9 @@ const Modal = ({ children, isOpened, onClose }) => {
         onClose();
       }
     };
-    document.addEventListener("keydown", handleEsc);
+    if (isOpened) {
+      document.addEventListener("keydown", handleEsc);
+    }
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
@@ -43,6 +45,8 @@ const Modal = ({ children, isOpened, onClose }) => {
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
+  isOpened: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

@@ -13,7 +13,7 @@ export default function OrderDetails(props) {
       </h2>
       <div className={`${styles.status} mt-15 mb-15`}></div>
       <p className={`${styles.typography} text text_type_main-default`}>
-			{props.statusInfo}
+        {props.statusInfo}
       </p>
       <p
         className={`${styles.typography} text text_type_main-default text_color_inactive mt-2 mb-30`}
