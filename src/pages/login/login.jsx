@@ -47,7 +47,7 @@ export function LoginPage() {
       </form>
       <div className="mt-20">
         <p className="text text_type_main-default text_color_inactive mb-4">
-          Вы — новый пользователь?{" "}
+          Вы — новый пользователь?{" "}
           <Link
             to="/register"
             className={`${styles.text_color_active} text text_type_main-default`}

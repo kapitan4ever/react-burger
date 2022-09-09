@@ -26,6 +26,7 @@ import {
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getCookie } from "../../services/utils";
+import { getUser } from "../../services/actions/auth";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,8 +45,9 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
+		dispatch(getUser());
     history.replace({ state: null });
-  }, [dispatch]);
+  }, []);
 
   const messageModalState = useSelector((state) => state.messageModal);
 
@@ -107,7 +109,7 @@ const App = () => {
       </Switch>
       {background && (
         <Route path="/ingredients/:id">
-          <Modal title="Детали ингредиента" onClose={handleCloseModal}>
+          <Modal isOpened={true} onClose={handleCloseModal}>
             <IngredientDetails />
           </Modal>
         </Route>

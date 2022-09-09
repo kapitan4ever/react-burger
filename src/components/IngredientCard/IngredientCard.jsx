@@ -4,17 +4,14 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { itemTypes } from "../../utils/types";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { useState, useMemo } from "react";
-import Modal from "../Modal/Modal";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 
 const IngredientCard = (props) => {
-  const bun = useSelector((state) => state.constructorIngredients.bun);
+	const bun = useSelector((state) => state.constructorIngredients.bun);
   const filling = useSelector((state) => state.constructorIngredients.filling);
-  const [isOpened, setIsOpened] = useState(false);
   const location = useLocation();
   const { image, name, price } = props.ingredient;
 
@@ -37,12 +34,10 @@ const IngredientCard = (props) => {
   );
 
   return (
-    <>
       <li
         className={`${styles.item} mt-6 ml-4`}
         ref={ref}
         style={{ opacity }}
-        onClick={() => setIsOpened(true)}
       >
         {counter() > 0 && <Counter count={counter()} size="small" />}
         <Link
@@ -52,8 +47,7 @@ const IngredientCard = (props) => {
           }}
         >
           <img className="ml-4 mr-4 mb-1" src={image} alt={name} />
-        </Link>
-
+					</Link>
         <div className={styles.price}>
           <p className="text text_type_digits-default mr-2">{price}</p>
           <CurrencyIcon type="primary" />
@@ -62,18 +56,6 @@ const IngredientCard = (props) => {
           {name}
         </p>
       </li>
-      <Modal isOpened={isOpened} onClose={() => setIsOpened(false)}>
-        <IngredientDetails
-          title="Детали ингредиента"
-          img={props.ingredient.image_large}
-          name={props.ingredient.name}
-          calories={props.ingredient.calories}
-          prot={props.ingredient.proteins}
-          fat={props.ingredient.fat}
-          carb={props.ingredient.carbohydrates}
-        />
-      </Modal>
-    </>
   );
 };
 

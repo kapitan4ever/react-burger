@@ -1,31 +1,44 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import styles from "./reset-password.module.css";
-import {
-  Button,
-  Input,
-  PasswordInput,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../hooks/useForm";
+import { resetPassword } from "../../services/actions/auth";
+import { useDispatch, useSelector} from "react-redux";
+import { getCookie } from "../../services/utils";
 
 export function ResetPassword() {
-	const [value, setValue] = useState({
-    password: "",
-		code: ""
-  });
-  const onInputChange = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
+	const dispatch = useDispatch();
+	const location = useLocation();
+	//const { isLogin } = useSelector((state) => state.auth);
+	const {values, handleChange} = useForm({});
+	const {code, password} = values;
+	const cookie = getCookie('token');
+	const {forgotPasswordSuccess} = useSelector(state => state.auth);
+
+	const onSubmit = (e) => {
+    e.preventDefault();
+		dispatch(resetPassword(password, code));
   };
+
+
+	if (cookie) {
+    return <Redirect to={location.state?.from || "/"} />;
+  }
+	if (!forgotPasswordSuccess) {
+		return <Redirect to={{ pathname: "/forgot-password" }} />;
+	}
+
   return (
     <div className={styles.wrapper}>
       <h2 className={`text text_type_main-medium mb-6`}>
         Восстановление пароля
       </h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onSubmit}>
         <div className={`${styles.form__input} mb-6`}>
           <PasswordInput
-            onChange={onInputChange}
+            onChange={handleChange}
             placeholder={"Введите новый пароль"}
-            value={value.password}
+            value={password}
             name={"password"}
           />
         </div>
@@ -33,12 +46,9 @@ export function ResetPassword() {
           <Input
             type={"text"}
             placeholder={"Введите код из письма"}
-            onChange={onInputChange}
-            value={value.code}
+            onChange={handleChange}
+            value={code}
             name={"code"}
-            error={false}
-            errorText={"Ошибка"}
-            size={"default"}
           />
         </div>
         <Button type="primary" size="medium">

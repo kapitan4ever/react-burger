@@ -10,7 +10,7 @@ export default function ProfileContainer() {
 	function handleSingOut() {
 		dispatch(signOut());
 	};
-  //add Redirect to /login
+
   return (
     <div className={`${styles.content} mt-30`}>
       <nav className={`${styles.menu} mr-15`}>

@@ -12,21 +12,19 @@ import { getCookie } from "../../services/utils";
 export function ForgotPassword() {
 	const dispatch = useDispatch();
   const location = useLocation();
-	const { isLogin } = useSelector((state) => state.auth);
-	//const { email } = useSelector((state) => state.auth.form);
   const [email, setEmail] = useState('');
-	const token = getCookie('token');
-	const {forgotPassSuccess} = useSelector(state => state.auth);
+	const cookie = getCookie('token');
+	const {forgotPasswordSuccess} = useSelector(state => state.auth);
  	const onInputChange = e => {
-    dispatch(setEmail(e.target.value));
+    setEmail(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(forgotPassword({email}));
+    dispatch(forgotPassword(email));
   };
 
-	if (isLogin) {
+	if (cookie) {
     return <Redirect to={location.state?.from || "/"} />;
   }
   return (
@@ -48,7 +46,7 @@ export function ForgotPassword() {
           />
         </div>
         <Button type="primary" size="medium">
-					{!!forgotPassSuccess
+					{!!forgotPasswordSuccess
 					? (<Redirect to="/reset-password" />)
 				: ''
 				}

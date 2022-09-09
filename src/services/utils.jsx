@@ -6,7 +6,11 @@ export function getCookie(name) {
 }
 
 export function setCookie(name, value, props) {
-  props = props || {};
+  // props = {
+	// 	path: "/",
+	// 	...props
+	// };
+	props = props || {};
   let exp = props.expires;
   if (typeof exp == 'number' && exp) {
     const d = new Date();
