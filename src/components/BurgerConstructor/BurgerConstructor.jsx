@@ -43,7 +43,7 @@ const BurgerConstructor = () => {
   }, [bun, filling]);
 
 	const handleOpenModal = (ingredientIds) => {
-		cookie && setIsOpened(true) && dispatch(postOrder(ingredientIds));
+		cookie && dispatch(postOrder(ingredientIds));
 		!cookie && history.push('/login');
 	};
 
@@ -67,8 +67,6 @@ const BurgerConstructor = () => {
     }),
   });
 
-
-console.log(cookie);
   return (
     <section className={`${styles.box} mt-25`}>
       <ul ref={dropTarget} className={`${isHover ? styles.isHover : ""}`}>
@@ -115,7 +113,7 @@ console.log(cookie);
         <Button
           type="primary"
           size="medium"
-          onClick={() => { handleOpenModal(ingredientIds) }}
+          onClick={() => { setIsOpened(true); handleOpenModal(ingredientIds) }}
           disabled={
             (Object.keys(bun).length > 0) | (Object.keys(filling).length > 0)
               ? false
