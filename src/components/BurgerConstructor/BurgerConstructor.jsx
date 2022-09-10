@@ -14,28 +14,37 @@ import { useDrop } from "react-dnd";
 import {
   addBurgerFillingAction,
   addBurgerBunAction,
-  eraseConstructorAction,
 } from "../../services/actions/constructBurger";
 import { nanoid } from "nanoid";
 import { itemTypes } from "../../utils/types";
 import { addToConstructor } from "../../services/actions/constructor";
+import { useHistory } from "react-router-dom";
+import { getCookie } from '../../services/utils';
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
+	const history = useHistory();
   const [isOpened, setIsOpened] = useState(false);
   const orderId = useSelector((store) => store.orderDetails);
   const bun = useSelector((state) => state.constructorIngredients.bun);
   const filling = useSelector((state) => state.constructorIngredients.filling);
+	const cookie = getCookie('token');
   const ingredientIds = useMemo(
     () => [...filling.map((item) => item._id), bun._id, bun._id],
     [filling, bun]
   );
+
   const sum = useMemo(() => {
     return (
       (Object.keys(bun).length ? bun.price * 2 : 0) +
       filling.reduce((total, item) => total + item.price, 0)
     );
   }, [bun, filling]);
+
+	const handleOpenModal = (ingredientIds) => {
+		cookie && dispatch(postOrder(ingredientIds));
+		!cookie && history.push('/login');
+	};
 
   const totalSum = sum ? sum : 0;
 
@@ -103,11 +112,7 @@ const BurgerConstructor = () => {
         <Button
           type="primary"
           size="medium"
-          onClick={() => {
-            setIsOpened(true);
-            dispatch(postOrder(ingredientIds));
-            //eraseConstructorAction();
-          }}
+          onClick={() => { setIsOpened(true); handleOpenModal(ingredientIds) }}
           disabled={
             (Object.keys(bun).length > 0) | (Object.keys(filling).length > 0)
               ? false

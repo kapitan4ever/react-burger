@@ -1,8 +1,8 @@
-import styles from "./IngredientDetails.module.css";
+import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const IngredientDetails = () => {
+export function IngredientDetailsPage() {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const { id } = useParams();
   const ingredient = ingredients.find(({ _id }) => _id === id);
@@ -10,10 +10,13 @@ const IngredientDetails = () => {
   if (!ingredient) {
     return null;
   }
+
   return (
-    <div className={styles.popup}>
-      <h2 className="mt-10 mr-10 ml-10 text text_type_main-large">Детали ингредиента</h2>
-      <img src={ingredient.image} alt={ingredient.name} />
+    <div className={styles.wrapper}>
+      <h1 className="mt-10 mr-10 ml-10 text text_type_main-large">
+        Детали ингредиета
+      </h1>
+      <img src={ingredient.image_large} alt={ingredient.name} />
       <h3 className={`${styles.name} text text_type_main-medium mt-4 mb-8`}>
         {ingredient.name}
       </h3>
@@ -22,7 +25,7 @@ const IngredientDetails = () => {
           <p
             className={`${styles.detail} text text_type_main-default text_color_inactive`}
           >
-            Каллории, ккал
+            Каллории,ккал
           </p>
           <p
             className={`${styles.detail} text text_type_digits-default text_color_inactive`}
@@ -69,6 +72,4 @@ const IngredientDetails = () => {
       </ul>
     </div>
   );
-	};
-
-export default IngredientDetails;
+}

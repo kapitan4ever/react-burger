@@ -62,8 +62,8 @@ const ConstructorItem = ({ data, index }) => {
   );
 };
 
-ConstructorItem.propTypes = {
-  data: itemTypes,
-};
+// ConstructorItem.propTypes = {
+//   data: itemTypes,
+// };
 
 export default ConstructorItem;

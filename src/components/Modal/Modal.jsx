@@ -14,11 +14,13 @@ const Modal = ({ children, isOpened, onClose }) => {
         onClose();
       }
     };
-    document.addEventListener("keydown", handleEsc);
+    if (isOpened) {
+      document.addEventListener("keydown", handleEsc);
+    }
     return () => {
       document.removeEventListener("keydown", handleEsc);
     };
-  });
+  }, [isOpened]);
 
   if (!isOpened) {
     return null;
