@@ -23,10 +23,12 @@ import {
   ResetPassword,
   Error404,
   IngredientDetailsPage,
+	FeedPage,
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getCookie } from "../../services/utils";
 import { getUser } from "../../services/actions/auth";
+import OrderInfo from "../OrderInfo/OrderInfo";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -103,6 +105,12 @@ const App = () => {
         <Route path="/ingredients/:id" exact>
           <IngredientDetailsPage />
         </Route>
+				<Route path="/feed" exact>
+          <FeedPage />
+        </Route>
+				<Route path="/feed/:id" exact>
+          <OrderInfo />
+        </Route>
         <Route>
           <Error404 />
         </Route>
@@ -111,6 +119,13 @@ const App = () => {
         <Route path="/ingredients/:id">
           <Modal isOpened={true} onClose={handleCloseModal}>
             <IngredientDetails />
+          </Modal>
+        </Route>
+      )}
+			{background && (
+        <Route path="/feed/:id">
+          <Modal isOpened={true} onClose={handleCloseModal}>
+					<OrderInfo />
           </Modal>
         </Route>
       )}

@@ -5,6 +5,7 @@ import { messageModalReducer } from "./messageModal";
 import { orderDetailsReducer } from "./orderDetails";
 import { constructorIngredientsReducer } from "./constructorIngredientsReducer";
 import { authReducer } from "./auth";
+import { wsReducer } from "./wsReducer";
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReduсer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   orderDetails: orderDetailsReducer,
   constructorIngredients: constructorIngredientsReducer,
 	auth: authReducer,
+	orders: wsReducer,
 });

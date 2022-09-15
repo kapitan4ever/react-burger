@@ -6,6 +6,7 @@ import { Error404 } from "./not-found404/not-found404";
 import ProfilePage from "./profile/profile";
 import OrdersPage from "./profile/orders";
 import { IngredientDetailsPage } from "./ingredient-details/ingredient-details";
+import { FeedPage } from "./feed/feed";
 
 export {
 	LoginPage,
@@ -15,5 +16,6 @@ export {
 	Error404,
 	ProfilePage,
 	OrdersPage,
-	IngredientDetailsPage
+	IngredientDetailsPage,
+	FeedPage
 }
