@@ -13,9 +13,6 @@ export default function OrderInfo() {
   const order = orders?.find((order) => order._id === id);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
 
-  const history = useHistory();
-  const location = useLocation();
-
   const orderIngredientsData = useMemo(() => {
     return order?.ingredients.map((id) => {
       return ingredients?.find((item) => {
@@ -60,7 +57,6 @@ export default function OrderInfo() {
 				<div className={styles.card__components}>
         <ul className={styles.card__list}>
 					<OrderInfoDetails details={orderIngredientsData} key={id}/>
-          
         </ul>
 				</div>
       </div>

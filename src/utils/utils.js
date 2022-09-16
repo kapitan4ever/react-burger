@@ -1,5 +1,3 @@
-//import { useMemo } from 'react';
-
 export const formatDate = (date) => {
 	const formatter = new Intl.DateTimeFormat("ru", {
 		hour: 'numeric',
@@ -41,28 +39,3 @@ export const formatDate = (date) => {
 	}
 	return `${formatDay(dateOfOrder, dayQty)}, ${formatter.format(dateOfOrder)} i-GMT+3`
 };
-
-// export const statusText = (status) => {
-// 	const [statusText, setStatusText] = useState(null);
-// 	const preparedStatusText = useMemo(() => {
-//     if (!status) {
-//       return null;
-//     }
-
-//     switch (status) {
-//       case CREATED:
-//         return 'Создан';
-//       case PENDING:
-//         return 'Готовится';
-//       case DONE:
-//         return 'Выполнен';
-//       default:
-//         return status;
-//     }
-//   }, [status]);
-
-// 	useEffect(() => {
-//      setStatusText(preparedStatusText);
-//   }, [preparedStatusText]);
-// 	return [statusText];
-// };

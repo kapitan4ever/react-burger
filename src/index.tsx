@@ -13,12 +13,23 @@ import {
   BrowserRouter as Router,
   // @ts-ignore
 } from "react-router-dom";
-import {WS_ORDERS_ALL, WS_ACTIONS } from "./utils/constants";
+import {
+  WS_ORDERS,
+  WS_ACTIONS,
+  WS_ORDERS_ALL,
+  WS_AUTH_ACTIONS,
+} from "./utils/constants";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk, socketMiddleware(WS_ORDERS_ALL, WS_ACTIONS)))
+  composeWithDevTools(
+    applyMiddleware(
+      thunk,
+      socketMiddleware(WS_ORDERS_ALL, WS_ACTIONS),
+      socketMiddleware(WS_ORDERS, WS_AUTH_ACTIONS)
+    )
+  )
 );
 
 const root = ReactDOM.createRoot(

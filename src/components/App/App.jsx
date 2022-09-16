@@ -24,6 +24,8 @@ import {
   Error404,
   IngredientDetailsPage,
 	FeedPage,
+	OrderInfoPage,
+	OrdersPage
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getCookie } from "../../services/utils";
@@ -87,6 +89,9 @@ const App = () => {
             )}
           </main>
         </Route>
+				<Route path="/profile/orders">
+          <OrdersPage />
+        </Route>
         <ProtectedRoute path="/profile">
           <ProfileContainer />
         </ProtectedRoute>
@@ -108,8 +113,8 @@ const App = () => {
 				<Route path="/feed" exact>
           <FeedPage />
         </Route>
-				<Route path="/feed/:id" exact>
-          <OrderInfo />
+				<Route path="/feed/:id">
+          <OrderInfoPage />
         </Route>
         <Route>
           <Error404 />
@@ -128,6 +133,13 @@ const App = () => {
 					<OrderInfo />
           </Modal>
         </Route>
+      )}
+			{background && (
+        <ProtectedRoute path="/profile/orders/:id">
+          <Modal isOpened={true} onClose={handleCloseModal}>
+					<OrderInfo />
+          </Modal>
+        </ProtectedRoute>
       )}
     </div>
   );

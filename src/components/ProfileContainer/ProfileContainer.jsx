@@ -1,11 +1,13 @@
-import { NavLink, Switch, Route } from "react-router-dom";
-import { ProfilePage, OrdersPage } from "../../pages";
+import { NavLink, Switch, Route, useLocation } from "react-router-dom";
+import { ProfilePage, OrdersPage, Orders, OrderInfoPage } from "../../pages";
 import styles from "./profileContainer.module.css";
 import { useDispatch } from 'react-redux';
 import {signOut} from '../../services/actions/auth';
 
 export default function ProfileContainer() {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const background = location.state?.background;
 
 	function handleSingOut() {
 		dispatch(signOut());
@@ -43,7 +45,7 @@ export default function ProfileContainer() {
           В этом разделе вы можете изменить свои персональные данные
         </span>
       </nav>
-      <Switch>
+      <Switch location={background || location}>
 				<Route path="/profile/orders" exact><OrdersPage /></Route>
         <Route path="/profile" exact><ProfilePage /></Route>
       </Switch>
