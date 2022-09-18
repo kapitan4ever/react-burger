@@ -3,10 +3,10 @@ import { nanoid } from 'nanoid';
 import styles from './statsOrders.module.css';
 
 export const StatsOrders = () => {
-	const { orders, total, totalToday } = useSelector(store => store.orders);
+	const { orders } = useSelector(store => store.ordersList);
 
-	const orderDone = orders?.filter(order => order.status === 'done').slice(0,20);
-	const orderPending = orders?.filter(order => order.status !== 'done').slice(0,20);
+	const orderDone = orders.orders?.filter(order => order.status === 'done').slice(0,20);
+	const orderPending = orders.orders?.filter(order => order.status !== 'done').slice(0,20);
 
 	const ItemId = nanoid();
 
@@ -34,11 +34,11 @@ export const StatsOrders = () => {
 			</div>
 			<div className={`${styles.stats__completed} pb-15`}>
 				<p className='text text_type_main-medium'>Выполнено за все время:</p>
-				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{total}</h2>
+				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{orders.total}</h2>
 			</div>
 			<div className={styles.stats__completed}>
 				<p className='text text_type_main-medium'>Выполнено за сегодня:</p>
-				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{totalToday}</h2>
+				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{orders.totalToday}</h2>
 			</div>
 		</div >)
 }

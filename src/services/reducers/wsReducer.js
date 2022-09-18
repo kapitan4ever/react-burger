@@ -1,17 +1,18 @@
 import {
 	WS_CONNECTION_SUCCESS,
-	WS_CONNECTION_ERROR,
-	WS_CLEAR_STORE,
-	WS_GET_MESSAGE,
-	WS_CONNECTION_CLOSED
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSED,
+  WS_GET_ORDERS,
+  WS_AUTH_CONNECTION_SUCCESS,
+  WS_AUTH_CONNECTION_ERROR,
+  WS_AUTH_CONNECTION_CLOSED,
+  WS_AUTH_GET_ORDERS,
 } from '../actions/action-types';
 
 const initialState = {
   wsConnected: false,
-  orders: [],
-	error: null,
-	total: 0,
-	totalToday: 0,
+  orders: {},
+	userOrders: {}
 };
 
 export const wsReducer = (state = initialState, action) => {
@@ -19,37 +20,43 @@ export const wsReducer = (state = initialState, action) => {
     case WS_CONNECTION_SUCCESS:
       return {
         ...state,
-        wsConnected: true,
-				error: null
+        wsConnected: true
       };
-
     case WS_CONNECTION_ERROR:
       return {
         ...state,
-        wsConnected: false,
-				error: action.payload
+        wsConnected: false
       };
-
     case WS_CONNECTION_CLOSED:
       return {
         ...state,
-        wsConnected: false,
-				error: null
+        wsConnected: false
       };
-
-    case WS_GET_MESSAGE:
+    case WS_GET_ORDERS:
       return {
         ...state,
-        orders: action.payload.orders,
-				total: action.payload.total,
-				totalToday: action.payload.totalToday,
+        orders: action.payload
       };
-    case WS_CLEAR_STORE:
+    case WS_AUTH_CONNECTION_SUCCESS:
       return {
         ...state,
-        orders: initialState.orders
+        wsConnected: true
       };
-
+    case WS_AUTH_CONNECTION_ERROR:
+      return {
+        ...state,
+        wsConnected: false
+      };
+    case WS_AUTH_CONNECTION_CLOSED:
+      return {
+        ...state,
+        wsConnected: false
+      };
+    case WS_AUTH_GET_ORDERS:
+      return {
+        ...state,
+        userOrders: { ...action.payload, orders: action.payload.orders.reverse() }
+      };
     default:
       return state;
   }

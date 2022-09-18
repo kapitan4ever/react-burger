@@ -33,6 +33,7 @@ const BurgerConstructor = () => {
     () => [...filling.map((item) => item._id), bun._id, bun._id],
     [filling, bun]
   );
+	const { authorization } = useSelector(store => store.auth);
 
   const sum = useMemo(() => {
     return (
@@ -41,8 +42,8 @@ const BurgerConstructor = () => {
     );
   }, [bun, filling]);
 
-	const handleOpenModal = (ingredientIds) => {
-		cookie && dispatch(postOrder(ingredientIds));
+	const handleOpenModal = (orderId) => {
+		cookie && dispatch(postOrder(orderId, setIsOpened));
 		!cookie && history.push('/login');
 	};
 

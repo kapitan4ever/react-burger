@@ -14,10 +14,9 @@ import {
   // @ts-ignore
 } from "react-router-dom";
 import {
-  WS_ORDERS,
-  WS_ACTIONS,
-  WS_ORDERS_ALL,
-  WS_AUTH_ACTIONS,
+  wsUrl,
+  wsActions,
+  wsActionsAuth,
 } from "./utils/constants";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 
@@ -26,8 +25,8 @@ const store = createStore(
   composeWithDevTools(
     applyMiddleware(
       thunk,
-      socketMiddleware(WS_ORDERS_ALL, WS_ACTIONS),
-      socketMiddleware(WS_ORDERS, WS_AUTH_ACTIONS)
+      socketMiddleware(wsUrl, wsActions),
+      socketMiddleware(wsUrl, wsActionsAuth)
     )
   )
 );

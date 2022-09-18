@@ -1,17 +1,18 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./orderInfo.module.css";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { formatDate } from "../../utils/utils";
-import { ThumbnailImage } from "../Orders/OrdersCard/ThumbnailImage/ThumbnailImage";
 import { OrderInfoDetails } from "./OrderInfoDetails/OrderInfoDetails";
 
 export default function OrderInfo() {
   const { id } = useParams();
-  const orders = useSelector((store) => store.orders.orders);
-  const order = orders?.find((order) => order._id === id);
-  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const { orders } = useSelector((store) => store.ordersList);
+  const { ingredients } = useSelector((store) => store.ingredients);
+	const { userOrders } = useSelector(store => store.ordersList);
+
+	const order = orders.orders?.find(({ _id }) => id === _id) || userOrders.orders?.find(({ _id }) => id === _id);
 
   const orderIngredientsData = useMemo(() => {
     return order?.ingredients.map((id) => {

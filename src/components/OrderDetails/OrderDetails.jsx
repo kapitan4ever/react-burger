@@ -1,12 +1,14 @@
 import styles from "./OrderDetails.module.css";
 import PropTypes from "prop-types";
+import { useSelector } from 'react-redux';
 export default function OrderDetails(props) {
+	const orderNumber = useSelector(store => store.orderDetails.order.number);
   return (
     <div className={styles.popup}>
       <p
         className={`${styles.typography} ${styles.totalSum} mt-30 mb-8 text text_type_digits-large`}
       >
-        {props.orderId}
+        {orderNumber}
       </p>
       <h2 className={`${styles.typography} text text_type_main-medium`}>
         идентификатор заказа

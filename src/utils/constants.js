@@ -1,41 +1,37 @@
 import {
+	WS_CONNECTION_START,
+	WS_CONNECTION_CLOSE,
+	WS_CONNECTION_SUCCESS,
+	WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_START,
-  WS_CONNECTION_SUCCESS,
-  WS_GET_MESSAGE,
-  WS_CONNECTION_CLOSE,
-	WS_CLEAR_STORE,
-	WS_AUTH_CONNECTION_CLOSED,
-  WS_AUTH_CONNECTION_ERROR,
-  WS_AUTH_CONNECTION_START,
+  WS_GET_ORDERS,
+	WS_AUTH_CONNECTION_START,
+	WS_AUTH_CONNECTION_CLOSE,
   WS_AUTH_CONNECTION_SUCCESS,
-  WS_AUTH_GET_MESSAGE,
-  WS_AUTH_CONNECTION_CLOSE,
-	WS_AUTH_CLEAR_STORE
+  WS_AUTH_CONNECTION_CLOSED,
+  WS_AUTH_CONNECTION_ERROR,
+  WS_AUTH_GET_ORDERS,
 } from '../services/actions/action-types';
 
-export const WS_ORDERS_ALL = 'wss://norma.nomoreparties.space/orders/all';
-export const WS_ORDERS = 'wss://norma.nomoreparties.space/orders';
+//export const WS_ORDERS_ALL = 'wss://norma.nomoreparties.space/orders/all';
+export const wsUrl = 'wss://norma.nomoreparties.space/orders';
 
-export const WS_ACTIONS = {
+export const wsActions = {
   wsInit: WS_CONNECTION_START,
   wsClose: WS_CONNECTION_CLOSE,
-	wsClearStore: WS_CLEAR_STORE,
-  onOpen: WS_CONNECTION_SUCCESS,
+	onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
-  onMessage: WS_GET_MESSAGE
+  onMessage: WS_GET_ORDERS
 };
 
-export const WS_AUTH_ACTIONS = {
+export const wsActionsAuth = {
   wsInit: WS_AUTH_CONNECTION_START,
   wsClose: WS_AUTH_CONNECTION_CLOSE,
-	wsClearStore: WS_AUTH_CLEAR_STORE,
   onOpen: WS_AUTH_CONNECTION_SUCCESS,
   onClose: WS_AUTH_CONNECTION_CLOSED,
   onError: WS_AUTH_CONNECTION_ERROR,
-  onMessage: WS_AUTH_GET_MESSAGE
+  onMessage: WS_AUTH_GET_ORDERS
 };
 
 export const MAX_ITEMS = 6;
