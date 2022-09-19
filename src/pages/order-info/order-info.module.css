@@ -1,44 +1,3 @@
-/* .wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 0px;
-	margin: 0;
-	width: 480px;
-	left: calc(50% - 480px/2);
-	top: 180px;
-	background-color: #131316;
-	max-width: 720px;
-	position: fixed;
-	z-index: 1;
-	box-sizing: border-box;
-}
-
-.card__components {
-	text-align: center;
-	justify-content: space-between;
-	align-content: center;
-	position: relative;
-	min-width: 640px;
-	min-height: 304px;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-	list-style: none;
-	overflow-y: auto;
-	margin-bottom: 24px;
-}
-
-.card__components::-webkit-scrollbar {
-	background-color: #2F2F37;
-	width: 8px;
-}
-
-.card__components:-webkit-scrollbar-thumb {
-	background-color: #8585AD;
-} */
-
 .card {
   max-width: 640px;
   margin: auto;
@@ -123,6 +82,8 @@
 
 .popup {
 	padding: 24px;
+	max-width: 640px;
+	margin: 0 auto;
 }
 
 .order__number {

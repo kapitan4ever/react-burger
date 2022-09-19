@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { nanoid } from 'nanoid';
 import styles from './statsOrders.module.css';
 
 export const StatsOrders = () => {
@@ -7,8 +6,6 @@ export const StatsOrders = () => {
 
 	const orderDone = orders.orders?.filter(order => order.status === 'done').slice(0,20);
 	const orderPending = orders.orders?.filter(order => order.status !== 'done').slice(0,20);
-
-	const ItemId = nanoid();
 
 	return (
 		<div className={styles.wrapper}>
@@ -18,7 +15,7 @@ export const StatsOrders = () => {
 					<ul className={styles.stats__orderList}>
 						{orderDone?.map((order, index) => {
 							return (
-								<li className={`${styles.stats__item} ${styles.stats__done} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
+								<li className={`${styles.stats__item} ${styles.stats__done} text text_type_digits-default`} key={order._id}>{order.number}</li>)
 						})}
 					</ul>
 				</div>
@@ -27,7 +24,7 @@ export const StatsOrders = () => {
 					<ul className={styles.stats__orderList}>
 						{orderPending?.map((order, index) => {
 							return (
-								<li className={`${styles.stats__item} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
+								<li className={`${styles.stats__item} text text_type_digits-default`} key={order._id}>{order.number}</li>)
 						})}
 					</ul>
 				</div>

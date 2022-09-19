@@ -52,6 +52,7 @@ export function getOrderDetails(orderDetails) {
           number: res.order.number,
         });
       })
+			.then((data) => dispatch(eraseConstructorAction(data)))
       .catch((error) => {
         console.log("Error in orderDetailsRequest", error);
         dispatch({

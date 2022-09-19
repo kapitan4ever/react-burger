@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useRef, useEffect } from "react";
-import { NavLink, Switch, Route, useLocation } from "react-router-dom";
+import { NavLink, Switch, Route, useLocation, useRouteMatch } from "react-router-dom";
 import { ProfilePage, OrderHistory, Orders, OrderInfoPage } from "../../pages";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,7 @@ export const Profile = () => {
   const location = useLocation();
   const background = location.state?.background;
   const { email, name } = useSelector((state) => state.auth.user);
+	const matchOrderDetails = !!useRouteMatch({ path: '/profile/orders/:id' });
 
   useEffect(() => {
     const cookie = getCookie("token");
@@ -57,7 +58,7 @@ export const Profile = () => {
 
   return (
     <div className={`${styles.content} mt-30`}>
-      <nav className={`${styles.menu} mr-15`}>
+      {!matchOrderDetails && <nav className={`${styles.menu} mr-15`}>
         <NavLink
           to="/profile"
           exact
@@ -86,9 +87,9 @@ export const Profile = () => {
         <span className={`text text_type_main-small text_color_inactive mt-20`}>
           В этом разделе вы можете изменить свои персональные данные
         </span>
-      </nav>
+      </nav>}
       <Switch location={background || location}>
-        <Route path="/profile/orders">
+        <Route path="/profile/orders" exact>
           <OrderHistory />
         </Route>
         <Route path="/profile/orders/:id" exact>

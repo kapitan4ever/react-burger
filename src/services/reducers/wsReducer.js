@@ -55,7 +55,7 @@ export const wsReducer = (state = initialState, action) => {
     case WS_AUTH_GET_ORDERS:
       return {
         ...state,
-        userOrders: { ...action.payload, orders: action.payload.orders },
+        userOrders: { ...action.payload, orders: action.payload.orders.reverse() },
       };
     default:
       return state;

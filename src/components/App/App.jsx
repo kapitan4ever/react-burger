@@ -92,10 +92,10 @@ const App = () => {
             )}
           </main>
         </Route>
-        <ProtectedRoute path="/profile">
+				<ProtectedRoute path="/profile" >
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id">
+				<ProtectedRoute path="/profile/orders/:id" >
           <OrderInfoPage />
         </ProtectedRoute>
         <Route path="/login">

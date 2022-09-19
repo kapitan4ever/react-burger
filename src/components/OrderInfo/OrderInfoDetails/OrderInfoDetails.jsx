@@ -1,7 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { nanoid } from 'nanoid';
 import { ThumbnailImage } from "../../Orders/OrdersCard/ThumbnailImage/ThumbnailImage";
 import styles from "./ordersInfoDetails.module.css"
 
@@ -27,16 +26,16 @@ export function OrderInfoDetails({details}) {
 		<div className={styles.container}>
 			{orderIngredient && [...new Set(orderIngredient)].map((item) => {
 				return (
-					<li className={`${styles.item} pb-3`} key={nanoid()}>
+					<li className={`${styles.item} pb-3`} key={item._id}>
 						{item && (
 							<>
 								<div className={styles.info}>
-									<ThumbnailImage image={item.image} alt={item.name} key={nanoid()} />
+									<ThumbnailImage image={item.image} alt={item.name} />
 									<p className={`${styles.text} text text_type_main-default pl-4`}>{item.name}</p>
 								</div>
 								<div className={styles.price}>
 									<p className='text text_type_digits-default pr-2'> {count(item)} x {item.type === 'bun' ? item.price * 2 : item.price}</p>
-									<CurrencyIcon type="primary" key={nanoid()} />
+									<CurrencyIcon type="primary" />
 								</div>
 							</>
 						)}
