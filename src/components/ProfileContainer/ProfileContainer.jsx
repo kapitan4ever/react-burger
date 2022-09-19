@@ -1,33 +1,36 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { NavLink, Switch, Route, useLocation } from "react-router-dom";
 import { ProfilePage, OrdersPage, Orders, OrderInfoPage } from "../../pages";
 import styles from "./profileContainer.module.css";
-import { useDispatch } from 'react-redux';
-import {signOut} from '../../services/actions/auth';
-import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { signOut } from "../../services/actions/auth";
+import { useSelector } from "react-redux";
 import { getCookie } from "../../services/utils";
-import {WS_AUTH_CONNECTION_START, WS_AUTH_CONNECTION_CLOSE} from '../../services/actions/action-types';
+import {
+  WS_AUTH_CONNECTION_START,
+  WS_AUTH_CONNECTION_CLOSE,
+} from "../../services/actions/action-types";
 
 export default function ProfileContainer() {
-	const dispatch = useDispatch();
-	const location = useLocation();
-	const background = location.state?.background;
-	
-	const { orders } = useSelector(store => store.ordersList.userOrders);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const background = location.state?.background;
 
-	useEffect(() => {
-    const accessToken = getCookie('accessToken');
-		
-    dispatch({ type: WS_AUTH_CONNECTION_START, payload: `?token=${accessToken}` });
+  const { orders } = useSelector((store) => store.wsAuthFeed.orders);
+
+  useEffect(() => {
+    const cookie = getCookie("token");
+
+    dispatch({ type: WS_AUTH_CONNECTION_START, payload: `?token=${cookie}` });
     return () => {
       dispatch({ type: WS_AUTH_CONNECTION_CLOSE });
-    }
-  }, [])
+    };
+  }, []);
 
-	function handleSingOut() {
-		dispatch(signOut());
-	};
- 
+  function handleSingOut() {
+    dispatch(signOut());
+  }
+  console.log(orders);
   return (
     <div className={`${styles.content} mt-30`}>
       <nav className={`${styles.menu} mr-15`}>
@@ -52,7 +55,7 @@ export default function ProfileContainer() {
           exact
           className={`${styles.link} text text_type_main-medium text_color_inactive`}
           activeClassName={`${styles.activeLink} text text_type_main-medium`}
-					onClick={handleSingOut}
+          onClick={handleSingOut}
         >
           Выход
         </NavLink>
@@ -61,12 +64,14 @@ export default function ProfileContainer() {
         </span>
       </nav>
       <Switch location={background || location}>
-			<Route path="/profile/orders" >
-			{orders?.map(order => (
-				<OrdersPage order={order} key={order._id}/>
-				))}
-			</Route>
-    	  <Route path="/profile" exact><ProfilePage /></Route>
+        <Route path="/profile/orders">
+          {orders?.map((order) => (
+            <OrdersPage order={order} key={order._id} />
+          ))}
+        </Route>
+        <Route path="/profile" exact>
+          <ProfilePage />
+        </Route>
       </Switch>
     </div>
   );

@@ -9,6 +9,20 @@ export const checkResponse = (res) => {
   }
 };
 
+export const orderDetailsRequest = async (productsId) => {
+	const res = await fetch(`${baseUrl}orders`, {
+		method: 'POST',
+		body: JSON.stringify({
+			ingredients: productsId
+		}),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + getCookie('token')
+		},
+	})
+	return checkResponse(res);
+}
+
 export const getIngredientsData = async () => {
   const res = await fetch(`${baseUrl}ingredients`, {
     method: "GET",

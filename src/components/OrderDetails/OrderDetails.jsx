@@ -1,8 +1,9 @@
 import styles from "./OrderDetails.module.css";
 import PropTypes from "prop-types";
-import { useSelector } from 'react-redux';
-export default function OrderDetails(props) {
-	const orderNumber = useSelector(store => store.orderDetails.order.number);
+import { useSelector } from "react-redux";
+
+const OrderDetails = () => {
+  const orderNumber = useSelector((store) => store.order.number);
   return (
     <div className={styles.popup}>
       <p
@@ -15,16 +16,18 @@ export default function OrderDetails(props) {
       </h2>
       <div className={`${styles.status} mt-15 mb-15`}></div>
       <p className={`${styles.typography} text text_type_main-default`}>
-        {props.statusInfo}
+        Ваш заказ начали готовить
       </p>
       <p
         className={`${styles.typography} text text_type_main-default text_color_inactive mt-2 mb-30`}
       >
-        {props.waitMessage}
+        Дождитесь готовности на орбитальной станции
       </p>
     </div>
   );
-}
+};
+
+export default OrderDetails;
 
 OrderDetails.propTypes = {
   orderId: PropTypes.string.isRequired,

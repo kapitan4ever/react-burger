@@ -3,7 +3,6 @@ import styleApp from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import ProfileContainer from "../ProfileContainer/ProfileContainer";
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +25,7 @@ import {
   FeedPage,
   OrderInfoPage,
   OrdersPage,
+  Profile,
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getUser } from "../../services/actions/auth";
@@ -35,20 +35,20 @@ const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-	const [isUserLoaded, setUserLoaded] = useState(false);
+  const [isUserLoaded, setUserLoaded] = useState(false);
   const { ingredients, isLoading, hasError } = useSelector(
     (store) => store.ingredients
   );
 
-	const init = async() => {
+  const init = async () => {
     await dispatch(getIngredients());
     await dispatch(getUser());
-    setUserLoaded(true)
+    setUserLoaded(true);
   };
 
   useEffect(() => {
     init();
-    history.replace({ state: null })
+    history.replace({ state: null });
   }, []);
 
   const messageModalState = useSelector((state) => state.messageModal);
@@ -59,7 +59,7 @@ const App = () => {
 
   const background = location.state && location.state.background;
 
-	if (!isUserLoaded) {
+  if (!isUserLoaded) {
     return null;
   }
   return (
@@ -92,11 +92,11 @@ const App = () => {
             )}
           </main>
         </Route>
-        <Route path="/profile/orders/:id" exact>
-					<OrderInfoPage />
-        </Route>
         <ProtectedRoute path="/profile">
-          <ProfileContainer />
+          <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders/:id">
+          <OrderInfoPage />
         </ProtectedRoute>
         <Route path="/login">
           <LoginPage />

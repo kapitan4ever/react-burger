@@ -1,16 +1,20 @@
 import { useState, useMemo } from "react";
-import { postOrder } from "../../services/actions/orderDetails";
-import styles from "./BurgerConstructor.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
+import { getOrderDetails } from "../../services/actions/orderDetails";
+
+import styles from "./BurgerConstructor.module.css";
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
+
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import { useDispatch, useSelector } from "react-redux";
-import { useDrop } from "react-dnd";
+
 import {
   addBurgerFillingAction,
   addBurgerBunAction,
@@ -19,21 +23,23 @@ import { nanoid } from "nanoid";
 import { itemTypes } from "../../utils/types";
 import { addToConstructor } from "../../services/actions/constructor";
 import { useHistory } from "react-router-dom";
-import { getCookie } from '../../services/utils';
+import { getCookie } from "../../services/utils";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-	const history = useHistory();
+  const { bun, filling, orderId } = useSelector(
+    (state) => state.constructorIngredients
+  );
+  const { orderDetailsRequest } = useSelector((state) => state.order);
+  const history = useHistory();
+  const cookie = getCookie("token");
+
   const [isOpened, setIsOpened] = useState(false);
-  const orderId = useSelector((store) => store.orderDetails);
-  const bun = useSelector((state) => state.constructorIngredients.bun);
-  const filling = useSelector((state) => state.constructorIngredients.filling);
-	const cookie = getCookie('token');
+
   const ingredientIds = useMemo(
     () => [...filling.map((item) => item._id), bun._id, bun._id],
     [filling, bun]
   );
-	const { authorization } = useSelector(store => store.auth);
 
   const sum = useMemo(() => {
     return (
@@ -42,10 +48,10 @@ const BurgerConstructor = () => {
     );
   }, [bun, filling]);
 
-	const handleOpenModal = (orderId) => {
-		cookie && dispatch(postOrder(orderId, setIsOpened));
-		!cookie && history.push('/login');
-	};
+  const orderDetailsModal = (orderId) => {
+    cookie && dispatch(getOrderDetails(orderId));
+    !cookie && history.push("/login");
+  };
 
   const totalSum = sum ? sum : 0;
 
@@ -110,18 +116,22 @@ const BurgerConstructor = () => {
           <CurrencyIcon type="primary" />
         </div>
 
-        <Button
-          type="primary"
-          size="medium"
-          onClick={() => { setIsOpened(true); handleOpenModal(ingredientIds) }}
-          disabled={
-            (Object.keys(bun).length > 0) | (Object.keys(filling).length > 0)
-              ? false
-              : true
-          }
-        >
-          Оформить заказ
-        </Button>
+        {filling.length === 0 || !!orderDetailsRequest ? (
+          <Button type="primary" size="large" disabled>
+            {orderDetailsRequest ? "...Заказ оформляется" : "Оформить заказ"}
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            size="large"
+            onClick={() => {
+              orderDetailsModal(orderId);
+              setIsOpened(true);
+            }}
+          >
+            Оформить заказ
+          </Button>
+        )}
 
         <Modal isOpened={isOpened} onClose={() => setIsOpened(false)}>
           {orderId.success ? (

@@ -4,7 +4,7 @@ import styles from "./ordersCard.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { formatDate } from "../../../utils/utils";
 import { ThumbnailImage } from "./ThumbnailImage/ThumbnailImage";
-import { MAX_ITEMS, ITEM_DISPLAY } from "../../../utils/constants"
+import { MAX_ITEMS, ITEM_DISPLAY } from "../../../utils/constants";
 
 export function OrdersCard({ order, status }) {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -59,7 +59,14 @@ export function OrdersCard({ order, status }) {
           {orderIngredientsData &&
             orderItems.map((item, index) => {
               return (
-                <li className={styles.card__list_items} key={index} style={{ left: index * ITEM_DISPLAY, zIndex: MAX_ITEMS - index }}>
+                <li
+                  className={styles.card__list_items}
+                  key={index}
+                  style={{
+                    left: index * ITEM_DISPLAY,
+                    zIndex: MAX_ITEMS - index,
+                  }}
+                >
                   {item && (
                     <ThumbnailImage image={item.image} alt={item.name} />
                   )}
@@ -74,7 +81,9 @@ export function OrdersCard({ order, status }) {
           >{`+${orderLength - MAX_ITEMS}`}</p>
         )}
         <div className={`${styles.card__price} text text_type_digits-default`}>
-          <p className={`${styles.card__total} text text_type_digits-default mr-2`}>
+          <p
+            className={`${styles.card__total} text text_type_digits-default mr-2`}
+          >
             {orderTotalPrice}
           </p>
           <CurrencyIcon type="primary" />

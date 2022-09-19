@@ -2,18 +2,21 @@
 	display: flex;
 	width: 100%;
 	max-width: 1280px;
-	margin: 0 auto;
+	margin: 120px auto;
 }
+
 .menu {
-display: flex;
-flex-direction: column;
-width: 320px;
-margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 320px;
+	margin-left: 20px;
 }
+
 .link {
 	text-decoration: none;
 	line-height: 64px;
 }
+
 .activeLink {
 	color: #fff;
 }
@@ -30,6 +33,7 @@ margin-left: 20px;
 	max-width: 720px;
 	box-sizing: border-box;
 }
+
 .form {
 	display: flex;
 	justify-content: center;
@@ -41,17 +45,20 @@ margin-left: 20px;
 	flex-direction: column;
 	align-items: center;
 }
+
 .form__input {
 	width: 100%;
 	display: flex;
- }
-.form__input div{
+}
+
+.form__input div {
 	width: 100%;
- }
- .form__input svg {
+}
+
+.form__input svg {
 	position: absolute;
 	width: 24px;
 	height: 24px;
 	top: 20px;
 	right: 24px;
- }
+}
