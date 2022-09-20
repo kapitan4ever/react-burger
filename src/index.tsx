@@ -13,10 +13,22 @@ import {
   BrowserRouter as Router,
   // @ts-ignore
 } from "react-router-dom";
+import {
+  wsUrl,
+  wsActions,
+  wsActionsAuth,
+} from "./utils/constants";
+import { socketMiddleware } from "./services/middleware/socketMiddleware";
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(
+    applyMiddleware(
+      thunk,
+      socketMiddleware(wsUrl, wsActions),
+      socketMiddleware(wsUrl, wsActionsAuth)
+    )
+  )
 );
 
 const root = ReactDOM.createRoot(

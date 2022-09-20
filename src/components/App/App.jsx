@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styleApp from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import ProfileContainer from "../ProfileContainer/ProfileContainer";
 import Modal from "../Modal/Modal";
 import MessageModal from "../MessageModal/MessageModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,29 +22,32 @@ import {
   ResetPassword,
   Error404,
   IngredientDetailsPage,
+  FeedPage,
+  OrderInfoPage,
+  OrdersPage,
+  Profile,
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import { getCookie } from "../../services/utils";
 import { getUser } from "../../services/actions/auth";
+import OrderInfo from "../OrderInfo/OrderInfo";
 
 const App = () => {
   const dispatch = useDispatch();
-
   const history = useHistory();
   const location = useLocation();
-  const background = location.state?.background; // ? - оператор условной последовательности
-
+  const [isUserLoaded, setUserLoaded] = useState(false);
   const { ingredients, isLoading, hasError } = useSelector(
     (store) => store.ingredients
   );
 
-  const token = localStorage.getItem("refreshToken");
-  const cookie = getCookie("token");
-  const isTokenExpired = localStorage.getItem("isTokenExpired");
+  const init = async () => {
+    await dispatch(getIngredients());
+    await dispatch(getUser());
+    setUserLoaded(true);
+  };
 
   useEffect(() => {
-    dispatch(getIngredients());
-		dispatch(getUser());
+    init();
     history.replace({ state: null });
   }, []);
 
@@ -55,6 +57,11 @@ const App = () => {
     history.goBack();
   };
 
+  const background = location.state && location.state.background;
+
+  if (!isUserLoaded) {
+    return null;
+  }
   return (
     <div className={`${styleApp.app}`}>
       <AppHeader />
@@ -85,34 +92,55 @@ const App = () => {
             )}
           </main>
         </Route>
-        <ProtectedRoute path="/profile">
-          <ProfileContainer />
+				<ProtectedRoute path="/profile" >
+          <Profile />
         </ProtectedRoute>
-        <Route path="/login" exact>
+				<ProtectedRoute path="/profile/orders/:id" >
+          <OrderInfoPage />
+        </ProtectedRoute>
+        <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="/register" exact>
+        <Route path="/register">
           <Register />
         </Route>
-        <Route path="/forgot-password" exact>
+        <Route path="/forgot-password">
           <ForgotPassword />
         </Route>
-        <Route path="/reset-password" exact>
+        <Route path="/reset-password">
           <ResetPassword />
         </Route>
         <Route path="/ingredients/:id" exact>
           <IngredientDetailsPage />
+        </Route>
+        <Route path="/feed" exact>
+          <FeedPage />
+        </Route>
+        <Route path="/feed/:id">
+          <OrderInfoPage />
         </Route>
         <Route>
           <Error404 />
         </Route>
       </Switch>
       {background && (
-        <Route path="/ingredients/:id">
-          <Modal isOpened={true} onClose={handleCloseModal}>
-            <IngredientDetails />
-          </Modal>
-        </Route>
+        <Switch>
+          <Route path="/ingredients/:id">
+            <Modal isOpened={true} onClose={handleCloseModal}>
+              <IngredientDetails />
+            </Modal>
+          </Route>
+          <Route path="/feed/:id" exact>
+            <Modal isOpened={true} onClose={handleCloseModal}>
+              <OrderInfo />
+            </Modal>
+          </Route>
+          <Route path="/profile/orders/:id" exact>
+            <Modal isOpened={true} onClose={handleCloseModal}>
+              <OrderInfo />
+            </Modal>
+          </Route>
+        </Switch>
       )}
     </div>
   );

@@ -1,0 +1,177 @@
+.card {
+  max-width: 640px;
+  margin: auto;
+  margin-top: 122px;
+  z-index: 2;
+}
+
+.order_number {
+  text-align: center;
+}
+
+.order_status {
+  color: #00CCCC;
+}
+
+.ingredients {
+  height: 320px;
+  overflow-y: scroll;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #8585AD;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: #2F2F37;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  max-width: 608px;
+}
+
+.image_container {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(to right,  #801AB2,#4C4CFF);
+  border-radius: 100%;
+  padding: 2px;
+}
+
+.image_container2 {
+  background-color: #131316;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover ;
+}
+
+.ingredient_title {
+  width: 358px;
+}
+
+.ingredient_price {
+  display: flex;
+  width: 150px;
+  justify-content: flex-end;
+}
+
+.total_price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+}
+
+
+.popup {
+	padding: 24px;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.order__number {
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}
+
+.card {
+	border-radius: 40px;
+	background-color: #1c1c21;
+	margin-bottom: 16px;
+	padding: 24px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, .04), 0px 0px 2px rgba(0, 0, 0, .06), 0px 0px 1px rgba(0, 0, 0, .04);
+}
+
+.card__orderID {
+	display: flex;
+	text-align: center;
+	justify-content: space-between;
+	align-content: center;
+	margin-bottom: 24px;
+}
+
+.card__info {
+	margin-bottom: 24px;
+}
+
+.card__components {
+	text-align: center;
+	justify-content: space-between;
+	align-content: center;
+	position: relative;
+	min-width: 640px;
+	min-height: 304px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	list-style: none;
+	overflow-y: auto;
+	margin-bottom: 24px;
+}
+
+.card__components::-webkit-scrollbar {
+	background-color: #2F2F37;
+	width: 8px;
+}
+
+.card__components:-webkit-scrollbar-thumb {
+	background-color: #8585AD;
+}
+
+.card__list {
+	list-style-type: none;
+	height: 64px;
+	margin: 0;
+	padding: 0;
+}
+
+.card__list_items {
+	list-style: none;
+	top: 0;
+}
+
+.card__cover {
+	position: absolute;
+	z-index: 1;
+	width: 64px;
+	height: 64px;
+	border-radius: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(28, 28, 33, .6);
+}
+
+.card__price {
+	display: flex;
+	text-align: center;
+	justify-content: space-between;
+	align-content: center;
+}
+
+.card__total {
+	display: inline-block;
+}
+
+.card__status {
+	color: #00cccc;
+}

@@ -7,16 +7,25 @@ import {
 } from "../actions/constructBurger";
 
 const defaultState = {
-  bun: {},
+  bun: [],
   filling: [],
+  orderId: [],
 };
 
 export const constructorIngredientsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD_BURGER_FILLING:
-      return { ...state, filling: [...state.filling, action.payload] };
+      return {
+        ...state,
+        filling: [...state.filling, action.payload],
+        orderId: [...state.orderId, action.payload._id],
+      };
     case ADD_BURGER_BUN:
-      return { ...state, bun: action.payload };
+      return {
+        ...state,
+        bun: action.payload,
+        orderId: [...state.orderId, action.payload._id],
+      };
     case DELETE_BURGER_FILLING:
       return {
         ...state,
@@ -46,5 +55,3 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
       return state;
   }
 };
-
-

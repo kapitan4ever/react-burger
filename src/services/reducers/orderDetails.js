@@ -1,24 +1,48 @@
-import { GET_ORDER_DETAILS } from "../actions/orderDetails";
+import {
+  CLOSE_ORDER_MODAL,
+  ORDER_DETAILS_FAILED,
+  ORDER_DETAILS_REQUEST,
+  ORDER_DETAILS_SUCCESS,
+} from "../actions/action-types";
 
-const defaultState = {
-  name: "",
-  order: {
-    number: null,
-  },
-  success: false,
+const orderInitialState = {
+  orderDetailsFailed: false,
+  number: null,
+  orderDetailsRequest: false,
 };
-export const orderDetailsReducer = (state = defaultState, action) => {
+
+export const orderDetailsReducer = (state = orderInitialState, action) => {
   switch (action.type) {
-    case GET_ORDER_DETAILS:
+    case ORDER_DETAILS_REQUEST: {
       return {
         ...state,
-        name: action.payload.name,
-        order: action.payload.order,
-        success: action.payload.success,
+        orderDetailsFailed: false,
+        orderDetailsRequest: true,
       };
-    default:
+    }
+    case ORDER_DETAILS_FAILED: {
+      return {
+        ...state,
+        orderDetailsFailed: true,
+        orderDetailsRequest: false,
+      };
+    }
+    case ORDER_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        number: action.number,
+        orderDetailsRequest: false,
+        orderDetailsFailed: false,
+      };
+    }
+    case CLOSE_ORDER_MODAL: {
+      return {
+        ...state,
+        number: null,
+      };
+    }
+    default: {
       return state;
+    }
   }
 };
-
-

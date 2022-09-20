@@ -8,17 +8,23 @@ import {
 const initialState = {
   bun: [],
   items: [],
+  itemsId: [],
 };
 
 export const constructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTRUCTOR_ADD: {
       if (action.data.type === "bun") {
-        return { ...state, bun: action.data };
+        return {
+          ...state,
+          bun: action.data,
+          itemsId: [...state.itemsId, action.data._id],
+        };
       }
       return {
         ...state,
         items: [...state.items, action.data],
+        itemsId: [...state.itemsId, action.data._id],
       };
     }
     case CONSTRUCTOR_DELETE: {
