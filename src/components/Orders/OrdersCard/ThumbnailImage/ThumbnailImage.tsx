@@ -1,7 +1,12 @@
 import styles from "./thumbnailImage.module.css";
-import propTypes from "prop-types";
+import { FC } from 'react';
 
-export const ThumbnailImage = ({ image, alt }) => {
+type TThumbnail = {
+  image: string;
+  alt: string;
+};
+
+export const ThumbnailImage: FC<TThumbnail> = ({ image, alt }) => {
   return (
     <div className={styles.border}>
       <div className={styles.item}>
@@ -11,7 +16,4 @@ export const ThumbnailImage = ({ image, alt }) => {
   );
 };
 
-ThumbnailImage.propTypes = {
-  image: propTypes.string.isRequired,
-  alt: propTypes.string.isRequired,
-};
+

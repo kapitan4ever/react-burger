@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 import { rootReducer } from "./services/reducers";
 import {
   BrowserRouter as Router,
-  // @ts-ignore
+ // @ts-ignore 
 } from "react-router-dom";
 import {
   wsUrl,

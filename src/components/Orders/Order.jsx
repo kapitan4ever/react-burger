@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./orders.module.css";
 import { OrdersCard } from "./OrdersCard/OrdersCard";
+//import { TLocation } from "../../services/types/data";
 
 export default function Order() {
   const location = useLocation();

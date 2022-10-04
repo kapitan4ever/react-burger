@@ -1,8 +1,9 @@
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import styles from './statsOrders.module.css';
 
-export const StatsOrders = () => {
-	const { orders } = useSelector(store => store.ordersList);
+export const StatsOrders = () => {// добавить FC
+	const { orders } = useSelector(store => store.ordersList);//типизировать useSelector
 
 	const orderDone = orders.orders?.filter(order => order.status === 'done').slice(0,20);
 	const orderPending = orders.orders?.filter(order => order.status !== 'done').slice(0,20);
