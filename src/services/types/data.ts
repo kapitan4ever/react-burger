@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type TLocation = {
 	state?: object;
 	from: string;
@@ -24,7 +26,6 @@ export type TIngredient = {
 export type TUser = {
 	email: string;
 	name: string;
-	
 }
 
 export type TUserResponse = {
@@ -33,4 +34,13 @@ export type TUserResponse = {
 	accessToken: string;
 	refreshToken: string;
 	message: string;
+}
+
+export type TSocketMiddlewareActions = {
+	wsInit: string;
+	wsClose: string;
+	onOpen: string;
+	onMessage: string;
+	onClose: string;
+	onError: string;
 }

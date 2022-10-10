@@ -1,23 +1,19 @@
-import { getCookie } from "../utils";
-export const socketMiddleware = (wsUrl, wsActions) => {
-  return (store) => {
-    let socket = null;
+import { Middleware, MiddlewareAPI } from "redux";
+import { TSocketMiddlewareActions } from "../types/data"
 
-    return next => action => {
+export const socketMiddleware = (wsUrl: string, wsActions: TSocketMiddlewareActions): Middleware => {
+  return (store: MiddlewareAPI) => {
+    let socket: WebSocket | null = null;
+
+    return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-			const { wsInit, wsClose, wsClearStore, onOpen, onMessage, onClose, onError } = wsActions;
-			const accessToken = getCookie('token')
+      const { wsInit, wsClose, onOpen, onMessage, onClose, onError } =
+        wsActions;
 
       if (type === wsInit) {
-					socket = new WebSocket(`${wsUrl}${payload}`);
-				}
-
-			// if (type === wsClose) {
-			// 	dispatch({ type: wsClearStore });
-			// 	socket.close(1000, 'CLOSE_NORMAL');
-			// 	socket = null;
-			// }
+        socket = new WebSocket(`${wsUrl}${payload}`);
+      }
 
       if (socket) {
         socket.onopen = (event) => {
@@ -36,6 +32,10 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         socket.onclose = (event) => {
           dispatch({ type: onClose, payload: event });
         };
+
+        if (type === wsClose) {
+          socket.close(1000);
+        }
       }
 
       next(action);

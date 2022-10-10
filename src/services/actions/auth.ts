@@ -11,7 +11,7 @@ import {
 
 import { deleteCookie, setCookie } from "../utils";
 import { AppDispatch, AppThunk } from "../types";
-import { TUser, TUserResponse } from "../types/data";
+import { TUser } from "../types/data";
 
 export const FORGOT_PASSWORD_REQUEST: "FORGOT_PASSWORD_REQUEST" =
   "FORGOT_PASSWORD_REQUEST";
@@ -41,7 +41,8 @@ export const REGISTER_FORM_SET_VALUE: "REGISTER_FORM_SET_VALUE" =
 export const LOGIN_FORM_REQUEST: "LOGIN_FORM_REQUEST" = "LOGIN_FORM_REQUEST";
 export const LOGIN_FORM_SUCCESS: "LOGIN_FORM_SUCCESS" = "LOGIN_FORM_SUCCESS";
 export const LOGIN_FORM_FAILED: "LOGIN_FORM_FAILED" = "LOGIN_FORM_FAILED";
-export const LOGIN_FORM_SET_VALUE: "LOGIN_FORM_SET_VALUE" = "LOGIN_FORM_SET_VALUE";
+export const LOGIN_FORM_SET_VALUE: "LOGIN_FORM_SET_VALUE" =
+  "LOGIN_FORM_SET_VALUE";
 
 export const LOGOUT_FORM_REQUEST: "LOGOUT_FORM_REQUEST" = "LOGOUT_FORM_REQUEST";
 export const LOGOUT_FORM_SUCCESS: "LOGOUT_FORM_SUCCESS" = "LOGOUT_FORM_SUCCESS";
@@ -93,9 +94,9 @@ export const forgotPassword: AppThunk = (email: string) => {
 };
 
 interface IResetFormSetValue {
-	readonly type: typeof RESET_FORM_SET_VALUE;
-	field: string;
-	value: string;
+  readonly type: typeof RESET_FORM_SET_VALUE;
+  field: string;
+  value: string;
 }
 
 export const setResetFormValue = (field: string, value: string) => ({
@@ -105,15 +106,15 @@ export const setResetFormValue = (field: string, value: string) => ({
 });
 
 interface IResetPasswordRequest {
-	readonly type: typeof RESET_PASSWORD_REQUEST;
+  readonly type: typeof RESET_PASSWORD_REQUEST;
 }
 interface IResetPasswordSuccess {
-	readonly type: typeof RESET_PASSWORD_SUCCESS;
-	password: string;
-	token: string;
+  readonly type: typeof RESET_PASSWORD_SUCCESS;
+  password: string;
+  token: string;
 }
 interface IResetPasswordFailed {
-	readonly type: typeof RESET_PASSWORD_FAILED;
+  readonly type: typeof RESET_PASSWORD_FAILED;
 }
 
 export const resetPassword: AppThunk = (password: string, token: string) => {
@@ -136,15 +137,15 @@ export const resetPassword: AppThunk = (password: string, token: string) => {
 };
 
 interface ILoginFormRequest {
-	readonly type: typeof LOGIN_FORM_REQUEST;
+  readonly type: typeof LOGIN_FORM_REQUEST;
 }
 interface ILoginFormSuccess {
-	readonly type: typeof LOGIN_FORM_SUCCESS;
-	email: string;
-	password: string;
+  readonly type: typeof LOGIN_FORM_SUCCESS;
+  email: string;
+  password: string;
 }
 interface ILoginFormFailed {
-	readonly type: typeof LOGIN_FORM_FAILED;
+  readonly type: typeof LOGIN_FORM_FAILED;
 }
 
 export const signIn: AppThunk = (email: string, password: string) => {
@@ -175,13 +176,13 @@ export const signIn: AppThunk = (email: string, password: string) => {
 };
 
 interface ILogoutFormRequest {
-	readonly type: typeof LOGOUT_FORM_REQUEST;
+  readonly type: typeof LOGOUT_FORM_REQUEST;
 }
 interface ILogoutFormSuccess {
-	readonly type: typeof LOGOUT_FORM_SUCCESS;
+  readonly type: typeof LOGOUT_FORM_SUCCESS;
 }
 interface ILogoutFormFailed {
-	readonly type: typeof LOGOUT_FORM_FAILED;
+  readonly type: typeof LOGOUT_FORM_FAILED;
 }
 
 export const signOut: AppThunk = () => {
@@ -213,8 +214,8 @@ export const signOut: AppThunk = () => {
 };
 
 interface ISetLoginFormValue {
-	readonly type: typeof LOGIN_FORM_SET_VALUE;
-	field: string;
+  readonly type: typeof LOGIN_FORM_SET_VALUE;
+  field: string;
   value: string;
 }
 
@@ -225,8 +226,8 @@ export const setLoginFormValue = (field: string, value: string) => ({
 });
 
 interface ISetRegisterFormValue {
-	readonly type: typeof REGISTER_FORM_SET_VALUE;
-	field: string;
+  readonly type: typeof REGISTER_FORM_SET_VALUE;
+  field: string;
   value: string;
 }
 
@@ -237,14 +238,14 @@ export const setRegisterFormValue = (field: string, value: string) => ({
 });
 
 interface IRegisterFormRequest {
-	readonly type: typeof REGISTER_FORM_REQUEST;
+  readonly type: typeof REGISTER_FORM_REQUEST;
 }
 interface IRegisterFormSuccess {
-	readonly type: typeof REGISTER_FORM_SUCCESS;
-	readonly user: TUser;
+  readonly type: typeof REGISTER_FORM_SUCCESS;
+  readonly user: TUser;
 }
 interface IRegisterFormFailed {
-	readonly type: typeof REGISTER_FORM_FAILED;
+  readonly type: typeof REGISTER_FORM_FAILED;
 }
 
 export const registerUser: AppThunk = (
@@ -279,14 +280,14 @@ export const registerUser: AppThunk = (
 };
 
 interface IGetUserRequest {
-	readonly type: typeof GET_USER_REQUEST;
+  readonly type: typeof GET_USER_REQUEST;
 }
 interface IGetUserSuccess {
-	readonly type: typeof GET_USER_SUCCESS;
-	readonly user: TUser;
+  readonly type: typeof GET_USER_SUCCESS;
+  readonly user: TUser;
 }
 interface IGetUserFailed {
-	readonly type: typeof GET_USER_FAILED;
+  readonly type: typeof GET_USER_FAILED;
 }
 
 export const getUser: AppThunk = () => {
@@ -310,14 +311,14 @@ export const getUser: AppThunk = () => {
 };
 
 interface IUpdateUserRequest {
-	readonly type: typeof PATCH_USER_REQUEST;
+  readonly type: typeof PATCH_USER_REQUEST;
 }
 interface IUpdateUserSuccess {
-	readonly type: typeof PATCH_USER_SUCCESS;
-	readonly user: TUser;
+  readonly type: typeof PATCH_USER_SUCCESS;
+  readonly user: TUser;
 }
 interface IUpdateUserFailed {
-	readonly type: typeof PATCH_USER_FAILED;
+  readonly type: typeof PATCH_USER_FAILED;
 }
 
 export const updateUser: AppThunk = (
@@ -345,14 +346,14 @@ export const updateUser: AppThunk = (
 };
 
 interface IUpdateTokenRequest {
-	readonly type: typeof UPDATE_TOKEN_REQUEST;
+  readonly type: typeof UPDATE_TOKEN_REQUEST;
 }
 interface IUpdateTokenSuccess {
-	readonly type: typeof UPDATE_TOKEN_SUCCESS;
-	readonly user: TUser;
+  readonly type: typeof UPDATE_TOKEN_SUCCESS;
+  readonly user: TUser;
 }
 interface IUpdateTokenFailed {
-	readonly type: typeof UPDATE_TOKEN_FAILED;
+  readonly type: typeof UPDATE_TOKEN_FAILED;
 }
 
 export const updateToken: AppThunk = () => {
@@ -383,27 +384,27 @@ export type TAuthActions =
   | IForgotPasswordRequest
   | IForgotPasswordSuccess
   | IForgotPasswordFailed
-	| IResetFormSetValue
-	| IResetPasswordRequest
-	| IResetPasswordSuccess
-	| IResetPasswordFailed
-	| ILoginFormRequest
-	| ILoginFormSuccess
-	| ILoginFormFailed
-	| ILogoutFormRequest
-	| ILogoutFormSuccess
-	| ILogoutFormFailed
-	| ISetLoginFormValue
-	| ISetRegisterFormValue
-	| IRegisterFormRequest
-	| IRegisterFormSuccess
-	| IRegisterFormFailed
-	| IGetUserRequest
-	| IGetUserSuccess
-	| IGetUserFailed
-	| IUpdateUserRequest
-	| IUpdateUserSuccess
-	| IUpdateUserFailed
-	| IUpdateTokenRequest
-	| IUpdateTokenSuccess
-	| IUpdateTokenFailed;
+  | IResetFormSetValue
+  | IResetPasswordRequest
+  | IResetPasswordSuccess
+  | IResetPasswordFailed
+  | ILoginFormRequest
+  | ILoginFormSuccess
+  | ILoginFormFailed
+  | ILogoutFormRequest
+  | ILogoutFormSuccess
+  | ILogoutFormFailed
+  | ISetLoginFormValue
+  | ISetRegisterFormValue
+  | IRegisterFormRequest
+  | IRegisterFormSuccess
+  | IRegisterFormFailed
+  | IGetUserRequest
+  | IGetUserSuccess
+  | IGetUserFailed
+  | IUpdateUserRequest
+  | IUpdateUserSuccess
+  | IUpdateUserFailed
+  | IUpdateTokenRequest
+  | IUpdateTokenSuccess
+  | IUpdateTokenFailed;
