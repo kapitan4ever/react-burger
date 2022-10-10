@@ -3,10 +3,9 @@ import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
-  const dispatch = useDispatch();
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const [current, setCurrent] = React.useState("buns");
 

@@ -24,7 +24,6 @@ import {
   IngredientDetailsPage,
   FeedPage,
   OrderInfoPage,
-  OrdersPage,
   Profile,
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";

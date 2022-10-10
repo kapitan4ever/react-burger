@@ -9,13 +9,32 @@ import {
   replaceBurgerFilling,
 } from "../../services/actions/constructBurger";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
+import { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-const ConstructorItem = ({ data, index }) => {
+type TIngredient = {
+	name: string;
+	price: number;
+	image: string;
+	id?: string;
+}
+
+type TConstructorItem = {
+	data: TIngredient;
+	index: number;
+	isHover?: any;
+}
+
+type TDragItem = {
+	index: number;
+	id?: string;
+	type: string;
+}
+
+const ConstructorItem: FC<TConstructorItem> = ({ data, index }) => {
   const { name, price, image, id } = data;
   const dispatch = useDispatch();
-  const onDelete = (id) => {
+  const onDelete = (id: string | undefined) => {
     dispatch(deleteBurgerFilling({ id }));
   };
   const filRef = useRef(null);
@@ -28,7 +47,7 @@ const ConstructorItem = ({ data, index }) => {
   });
   const opacity = isDragging ? 0.5 : 1;
 
-  const [{ isHover }, drop] = useDrop({
+  const [, drop] = useDrop<TDragItem>({
     accept: "ingredient",
     hover(data) {
       if (!filRef.current) {
@@ -39,19 +58,16 @@ const ConstructorItem = ({ data, index }) => {
       dispatch(replaceBurgerFilling({ hoverIndex, dragIndex }));
       data.index = hoverIndex;
     },
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
   });
   drag(drop(filRef));
 
   return (
     <li
-      className={`${styles.fillingItem} mt-4 ${isHover ? styles.isHover : ""}`}
+      className={`${styles.fillingItem} mt-4`}
       style={{ opacity }}
       ref={filRef}
     >
-      <DragIcon />
+      <DragIcon type="primary"/>
       <ConstructorElement
         text={name}
         price={price}
@@ -61,9 +77,5 @@ const ConstructorItem = ({ data, index }) => {
     </li>
   );
 };
-
-// ConstructorItem.propTypes = {
-//   data: itemTypes,
-// };
 
 export default ConstructorItem;

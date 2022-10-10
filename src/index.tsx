@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 import { rootReducer } from "./services/reducers";
 import {
   BrowserRouter as Router,
- // @ts-ignore 
+
 } from "react-router-dom";
 import {
   wsUrl,
@@ -20,7 +20,7 @@ import {
 } from "./utils/constants";
 import { socketMiddleware } from "./services/middleware/socketMiddleware";
 
-const store = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(
