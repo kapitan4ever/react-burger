@@ -19,6 +19,7 @@ interface IOrderDetailsRequest {
 }
 interface IOrderDetailsSuccess {
   readonly type: typeof ORDER_DETAILS_SUCCESS;
+  readonly number: number;
 }
 interface IOrderDetailsFailed {
   readonly type: typeof ORDER_DETAILS_FAILED;
@@ -48,7 +49,6 @@ export const getOrderDetails: AppThunk = (orderDetails: Array<string>) => {
           number: res.order.number,
         });
       })
-      //.then((data) => dispatch(eraseConstructorAction(data)))
       .catch((error) => {
         console.log("Error in orderDetailsRequest", error);
         dispatch({
@@ -57,28 +57,3 @@ export const getOrderDetails: AppThunk = (orderDetails: Array<string>) => {
       });
   };
 };
-
-//export const GET_ORDER_DETAILS = "GET_ORDER_DETAILS";
-
-// export const postOrder: AppThunk = (orderId) => {
-//   return function (dispatch: AppDispatch) {
-//     fetch(`${baseUrl}orders`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         ingredients: orderId,
-//       }),
-//     })
-//       .then((res) => checkResponse(res))
-//       .then((data) =>
-//         dispatch({
-//           type: GET_ORDER_DETAILS,
-//           payload: data,
-//         })
-//       )
-//       .then((data) => dispatch(eraseConstructorAction(data)))
-//       .catch((err) => console.log(err));
-//   };
-// };
