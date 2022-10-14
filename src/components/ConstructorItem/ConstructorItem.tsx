@@ -3,7 +3,7 @@ import {
   DragIcon,
   ConstructorElement,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { itemTypes } from "../../utils/types";
+//import { itemTypes } from "../../utils/types";
 import {
   deleteBurgerFilling,
   replaceBurgerFilling,

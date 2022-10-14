@@ -5,7 +5,8 @@ import { TLocation } from '../../services/types/data';
 
 interface IProtectedProps {
 	children: ReactNode;
-	pathname: string;
+	path: string;
+	exact?: boolean;
 }
 
 export const ProtectedRoute: FC<IProtectedProps> = ({ children, ...rest }) => {

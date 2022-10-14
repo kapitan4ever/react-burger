@@ -13,6 +13,7 @@ export const ingredientTypes = {
   type: PropTypes.string.isRequired,
   __v: PropTypes.number.isRequired,
   _id: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
 };
 
 export const itemTypes = PropTypes.shape(ingredientTypes).isRequired;

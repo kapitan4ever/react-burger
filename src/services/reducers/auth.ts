@@ -27,8 +27,46 @@ import {
   UPDATE_TOKEN_REQUEST,
   UPDATE_TOKEN_FAILED,
 } from "../actions/auth";
+import { TAuthActions } from "../actions/auth";
+import { TUser } from "../types/data";
 
-const initialState = {
+type AuthInitialState = {
+	isLogin: boolean;
+  message: string;
+  user: TUser,
+  form: {
+    email: string;
+    password: string;
+    code: string;
+    name: string;
+  },
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+  forgotPasswordSuccess: boolean;
+
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+  resetPasswordSuccess: boolean;
+
+  loginRequest: boolean;
+  loginFailed: boolean;
+  loginSuccess: boolean;
+
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+
+  getUserRequest: boolean;
+  getUserFailed: boolean;
+
+  updateUserRequest: boolean;
+  updateUserFailed: boolean;
+
+  updateTokenRequest: boolean;
+  updateTokenFailed: boolean;
+  updateTokenSuccess: boolean;
+}
+
+const initialState: AuthInitialState = {
   isLogin: false,
   message: "",
   user: {
@@ -67,7 +105,7 @@ const initialState = {
   updateTokenSuccess: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions): AuthInitialState => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST: {
       return {
@@ -155,7 +193,11 @@ export const authReducer = (state = initialState, action) => {
     case LOGIN_FORM_SUCCESS: {
       return {
         ...state,
-        user: action.user,
+        user: {
+          ...state.user,
+          email: "",
+          name: "",
+        },
         form: {
           ...state.form,
           email: "",
@@ -193,7 +235,11 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_FORM_SUCCESS: {
       return {
         ...state,
-        user: action.payload,
+        user: {
+					...state.user,
+					email: "",
+					name: "",
+				},
         form: {
           ...state.form,
           email: "",
@@ -271,7 +317,11 @@ export const authReducer = (state = initialState, action) => {
     case PATCH_USER_SUCCESS: {
       return {
         ...state,
-        user: action.payload,
+        user: {
+          ...state.user,
+          email: "",
+          name: "",
+        },
 				form: {
 					...state.form,
 					email: "",

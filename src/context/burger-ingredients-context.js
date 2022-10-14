@@ -1,5 +1,5 @@
-import { createContext } from "react";
+// import { createContext } from "react";
 
-const BurgerIngredientsContext = createContext([]);
+// const BurgerIngredientsContext = createContext([]);
 
-export default BurgerIngredientsContext;
+// export default BurgerIngredientsContext;

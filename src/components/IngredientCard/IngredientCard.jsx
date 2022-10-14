@@ -59,8 +59,8 @@ const IngredientCard = (props) => {
   );
 };
 
-IngredientCard.propTypes = {
-  ingredient: itemTypes,
-};
+// IngredientCard.propTypes = {
+//   ingredient: itemTypes,
+// };
 
 export default IngredientCard;
