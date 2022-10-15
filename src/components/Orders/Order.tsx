@@ -8,8 +8,8 @@ import { TLocation } from "../../services/types/data";
 
 export const Order: FunctionComponent = () => {
   const location = useLocation<TLocation>();
-	const orders = useSelector(store => store.ordersList.orders);
-  //const { orders } = useSelector(store => store.ordersList);
+	//const orders = useSelector(store => store.ordersList.orders);
+  const { orders } = useSelector(store => store.ordersList);
 	console.log(orders);
   return (
     <div className={styles.wrapper}>

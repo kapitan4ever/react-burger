@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type TLocation = {
 	state?: object;
 	from: string;
@@ -65,6 +63,7 @@ export type TFeed = {
 	status: string;
 	_id: string;
 	createdAt: string;
+	total: number;
 }
 
 export type TFeedResponse = {

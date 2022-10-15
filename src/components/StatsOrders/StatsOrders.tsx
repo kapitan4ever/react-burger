@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import styles from './statsOrders.module.css';
 
-export const StatsOrders = () => {// добавить FC
-	const { orders } = useSelector(store => store.ordersList);//типизировать useSelector
+export const StatsOrders: FC = () => {
+	const { orders, total, totalToday } = useSelector(store => store.ordersList);
 
-	const orderDone = orders.orders?.filter(order => order.status === 'done').slice(0,20);
-	const orderPending = orders.orders?.filter(order => order.status !== 'done').slice(0,20);
+	const orderDone = orders?.filter(order => order.status === 'done').slice(0,20);
+	const orderPending =orders?.filter(order => order.status !== 'done').slice(0,20);
 
 	return (
 		<div className={styles.wrapper}>
@@ -32,11 +32,11 @@ export const StatsOrders = () => {// добавить FC
 			</div>
 			<div className={`${styles.stats__completed} pb-15`}>
 				<p className='text text_type_main-medium'>Выполнено за все время:</p>
-				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{orders.total}</h2>
+				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{total}</h2>
 			</div>
 			<div className={styles.stats__completed}>
 				<p className='text text_type_main-medium'>Выполнено за сегодня:</p>
-				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{orders.totalToday}</h2>
+				<h2 className={`${styles.stats__totalItems} text text_type_digits-large`}>{totalToday}</h2>
 			</div>
 		</div >)
 }
