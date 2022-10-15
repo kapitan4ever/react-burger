@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useState, useMemo } from "react";
+import { useSelector, useDispatch } from "../../services/hooks";
+//import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
@@ -24,6 +25,7 @@ import { itemTypes } from "../../utils/types";
 import { addToConstructor } from "../../services/actions/constructor";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../services/utils";
+import { TIngredient, TLocation } from "../../services/types/data";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();

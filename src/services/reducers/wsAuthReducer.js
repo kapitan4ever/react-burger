@@ -10,6 +10,7 @@ const initialState = {
   orders: [],
   total: 0,
   totalToday: 0,
+	userOrders: {},
 };
 
 export const wsAuthReducer = (state = initialState, action) => {

@@ -29,7 +29,7 @@ import {
 } from "../../pages";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getUser } from "../../services/actions/auth";
-import OrderInfo from "../OrderInfo/OrderInfo";
+import { OrderInfo } from "../OrderInfo/OrderInfo";
 import { TLocation } from "../../services/types/data";
 
 // использовать в tsx с 18v react

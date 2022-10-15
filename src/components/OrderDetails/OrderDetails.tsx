@@ -1,8 +1,8 @@
+import { useSelector } from "../../services/hooks";
+import { FC } from "react";
 import styles from "./OrderDetails.module.css";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
 
-const OrderDetails = () => {
+const OrderDetails: FC = () => {
   const orderNumber = useSelector((store) => store.order.number);
   return (
     <div className={styles.popup}>
@@ -28,7 +28,3 @@ const OrderDetails = () => {
 };
 
 export default OrderDetails;
-
-OrderDetails.propTypes = {
-  orderId: PropTypes.string.isRequired,
-};

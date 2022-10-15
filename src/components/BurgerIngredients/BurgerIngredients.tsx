@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { useInView } from "react-intersection-observer";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
+//import { useSelector } from "react-redux";
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FC = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const [current, setCurrent] = React.useState("buns");
 
@@ -35,7 +36,7 @@ const BurgerIngredients = () => {
     }
   };
 
-  const handleButtonClick = (tab) => {
+  const handleButtonClick = (tab: string) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });

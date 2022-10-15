@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./feed.module.css";
-import Order from "../../components/Orders/Order";
+import {Order} from "../../components/Orders/Order";
 import { StatsOrders } from "../../components/StatsOrders/StatsOrders";
 import {
   WS_CONNECTION_START,
