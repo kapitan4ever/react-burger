@@ -1,12 +1,20 @@
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
 import { useMemo } from "react";
 import styles from "./ordersCard.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { formatDate } from "../../../utils/utils";
 import { ThumbnailImage } from "./ThumbnailImage/ThumbnailImage";
 import { MAX_ITEMS, ITEM_DISPLAY } from "../../../utils/constants";
+import { TFeed } from "../../../services/types/data";
+import { FC } from "react";
 
-export function OrdersCard({ order, status }) {
+type TOrdersCard = {
+	order: TFeed;
+	status: String;
+}
+
+export const OrdersCard: FC<TOrdersCard> = ({ order, status }) => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const { createdAt, number, name } = order;
 

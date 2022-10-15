@@ -20,7 +20,7 @@ export const Order: FunctionComponent = () => {
 						to={{ pathname: `/feed/${order._id}`, state: { background: location } }}
 						className={`${styles.link}`} key={order._id}
 					>
-						<OrdersCard order={order} status={false} key={index} />
+						<OrdersCard order={order} status={order.status} key={index} />
 					</Link>
 					)
         })}

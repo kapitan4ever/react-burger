@@ -35,5 +35,5 @@ export const wsActionsAuth: TSocketMiddlewareActions = {
   onMessage: WS_AUTH_GET_ORDERS,
 };
 
-export const MAX_ITEMS = 6;
-export const ITEM_DISPLAY = 48;
+export const MAX_ITEMS: number = 6;
+export const ITEM_DISPLAY: number = 48;
