@@ -11,7 +11,7 @@ import { FC } from "react";
 
 type TOrdersCard = {
 	order: TFeed;
-	status: String;
+	status: string;
 }
 
 export const OrdersCard: FC<TOrdersCard> = ({ order, status }) => {

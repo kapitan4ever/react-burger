@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo, FC } from 'react';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useRouteMatch } from 'react-router-dom';
@@ -13,7 +13,7 @@ import {
 } from '../../services/actions/action-types';
 import {OrderInfoDetails} from '../../components/OrderInfo/OrderInfoDetails/OrderInfoDetails';
 
-export function OrderInfoPage() {
+export const OrderInfoPage = () => {
 	const { ingredients } = useSelector(store => store.ingredients);
   const { orders } = useSelector((store) => store.ordersList);
   const { userOrders } = useSelector(store => store.ordersList);

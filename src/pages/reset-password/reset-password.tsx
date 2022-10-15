@@ -1,21 +1,22 @@
+import { FC, ChangeEvent, FormEvent } from "react";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { TLocation } from "../../services/types/data";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import styles from "./reset-password.module.css";
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../hooks/useForm";
 import { resetPassword } from "../../services/actions/auth";
-import { useDispatch, useSelector} from "react-redux";
 import { getCookie } from "../../services/utils";
 
-export function ResetPassword() {
+export const ResetPassword: FC = () => {
 	const dispatch = useDispatch();
-	const location = useLocation();
-	//const { isLogin } = useSelector((state) => state.auth);
+	const location = useLocation<TLocation>();
 	const {values, handleChange} = useForm({});
 	const {code, password} = values;
 	const cookie = getCookie('token');
 	const {forgotPasswordSuccess} = useSelector(state => state.auth);
 
-	const onSubmit = (e) => {
+	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 		dispatch(resetPassword(password, code));
   };
@@ -37,7 +38,6 @@ export function ResetPassword() {
         <div className={`${styles.form__input} mb-6`}>
           <PasswordInput
             onChange={handleChange}
-            placeholder={"Введите новый пароль"}
             value={password}
             name={"password"}
           />

@@ -1,4 +1,7 @@
 import styles from "./register.module.css";
+import { FC, ChangeEvent, FormEvent } from "react";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { TLocation } from "../../services/types/data";
 import {
   Button,
   Input,
@@ -10,19 +13,19 @@ import {
   registerUser,
   setRegisterFormValue,
 } from "../../services/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
 
-export function Register() {
+
+export const Register: FC = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { isLogin } = useSelector((state) => state.auth);
   const { email, password, name } = useSelector((state) => state.auth.form);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setRegisterFormValue(e.target.name, e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerUser(email, password, name));
   };
@@ -49,13 +52,9 @@ export function Register() {
         </div>
         <div className={`${styles.form__input} mb-6`}>
           <EmailInput
-            type={"email"}
-            placeholder={"E-mail"}
             onChange={onInputChange}
             value={email}
             name={"email"}
-            error={false}
-            errorText={"Ошибка"}
             size={"default"}
           />
         </div>

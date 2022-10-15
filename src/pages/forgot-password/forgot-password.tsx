@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC, ChangeEvent, FormEvent } from "react";
 import styles from "./forgot-password.module.css";
 import {
   Button,
@@ -6,20 +6,21 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { forgotPassword } from "../../services/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks";
 import { getCookie } from "../../services/utils";
+import { TLocation } from "../../services/types/data";
 
-export function ForgotPassword() {
+export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const [email, setEmail] = useState("");
   const cookie = getCookie("token");
   const { forgotPasswordSuccess } = useSelector((state) => state.auth);
-  const onInputChange = (e) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(forgotPassword(email));
   };
@@ -63,4 +64,4 @@ export function ForgotPassword() {
       </div>
     </div>
   );
-}
+};

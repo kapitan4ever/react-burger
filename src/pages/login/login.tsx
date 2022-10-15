@@ -1,4 +1,5 @@
 import styles from "./login.module.css";
+import { FC, ChangeEvent, FormEvent } from "react";
 import {
   Button,
   EmailInput,
@@ -6,19 +7,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation, Redirect } from "react-router-dom";
 import { signIn, setLoginFormValue } from "../../services/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { TLocation } from "../../services/types/data";
 
-export function LoginPage() {
+export const LoginPage: FC = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const { email, password } = useSelector((state) => state.auth.form);
   const { isLogin } = useSelector((state) => state.auth);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setLoginFormValue(e.target.name, e.target.value));
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(signIn(email, password));
   };
@@ -67,4 +69,4 @@ export function LoginPage() {
       </div>
     </div>
   );
-}
+};

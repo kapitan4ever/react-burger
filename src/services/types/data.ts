@@ -42,7 +42,7 @@ export type TOrder = {
 	price: number;
 	status: string;
 	_id: string;
-	createdAt?: string;
+	createdAt: string;
 }
 
 export type TSocketMiddlewareActions = {
@@ -55,15 +55,12 @@ export type TSocketMiddlewareActions = {
 }
 
 export type TFeed = {
-	orders: string;
-	userOrders: string;
 	ingredients: string[];
 	name: string;
 	number: number;
 	status: string;
 	_id: string;
 	createdAt: string;
-	total: number;
 }
 
 export type TFeedResponse = {
@@ -71,7 +68,6 @@ export type TFeedResponse = {
 	total: number;
 	totalToday: number;
 	orders: Array<TFeed>;
-	userOrders: Array<TFeed>;
 }
 
 export type TUserResponse = {
