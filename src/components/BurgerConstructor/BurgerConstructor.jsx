@@ -20,7 +20,7 @@ import {
   addBurgerBunAction,
 } from "../../services/actions/constructBurger";
 import { nanoid } from "nanoid";
-import { itemTypes } from "../../utils/types";
+
 import { addToConstructor } from "../../services/actions/constructor";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../services/utils";

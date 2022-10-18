@@ -3,7 +3,7 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { itemTypes } from "../../utils/types";
+
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
