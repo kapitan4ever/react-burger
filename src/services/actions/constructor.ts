@@ -5,6 +5,7 @@ export const CONSTRUCTOR_ADD: "CONSTRUCTOR_ADD" = "CONSTRUCTOR_ADD";
 export const CONSTRUCTOR_DELETE: "CONSTRUCTOR_DELETE" = "CONSTRUCTOR_DELETE";
 export const CONSTRUCTOR_REPLACE: "CONSTRUCTOR_REPLACE" = "CONSTRUCTOR_REPLACE";
 export const CONSTRUCTOR_RESET: "CONSTRUCTOR_RESET" = "CONSTRUCTOR_RESET";
+export const ERASE_CONSTRUCTOR: "ERASE_CONSTRUCTOR" = "ERASE_CONSTRUCTOR";
 
 interface IConstructorAdd {
 	readonly type: typeof CONSTRUCTOR_ADD;
@@ -33,6 +34,7 @@ export type TConstructorActions =
 | IConstructorDelete
 | IConstructorReplace
 | IConstructorReset;
+
 
 export const addToConstructor = (ingredient: TIngredient) => {
   return {

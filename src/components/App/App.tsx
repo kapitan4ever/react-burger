@@ -1,4 +1,4 @@
-import { useEffect, useState, FC } from "react";
+import { useEffect, useState, useCallback, FC } from "react";
 import { useSelector, useDispatch } from "../../services/hooks";
 import styleApp from "./App.module.css";
 import AppHeader from "../AppHeader/AppHeader";

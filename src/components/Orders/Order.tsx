@@ -1,4 +1,3 @@
-//import { useSelector } from "react-redux";
 import { FC } from "react";
 import { useSelector } from "../../services/hooks";
 import { useLocation, Link } from "react-router-dom";
@@ -8,8 +7,8 @@ import { TLocation } from "../../services/types/data";
 
 export const Order: FC = () => {
   const location = useLocation<TLocation>();
-	//const orders = useSelector(store => store.ordersList.orders);
-  const { orders } = useSelector(store => store.ordersList);
+	const orders = useSelector(store => store.ordersList.orders);
+  //const { orders } = useSelector(store => store.ordersList);
 
   return (
     <div className={styles.wrapper}>

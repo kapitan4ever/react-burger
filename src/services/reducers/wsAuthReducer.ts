@@ -5,14 +5,13 @@ import {
   WS_AUTH_GET_ORDERS,
 } from "../actions/action-types";
 import { TWsAuthActions } from "../actions/wsAuthActions";
-import { TFeed, TUser } from "../types/data";
+import { TFeed } from "../types/data";
 
 export type TWsAuthInitialState = {
   wsConnected: boolean;
   orders: TFeed[];
   total: number;
   totalToday: number;
-	userOrders: TFeed[];
 };
 
 const initialState: TWsAuthInitialState = {
@@ -20,7 +19,6 @@ const initialState: TWsAuthInitialState = {
   orders: [],
   total: 0,
   totalToday: 0,
-	userOrders: []
 };
 
 export const wsAuthReducer = (
@@ -47,13 +45,9 @@ export const wsAuthReducer = (
       return {
         ...state,
         orders: action.payload.orders,
-				userOrders: action.payload.orders
+				total: action.payload.total,
+				totalToday: action.payload.totalToday,
       };
-    // case WS_AUTH_GET_ORDERS:
-    //   return {
-    //     ...state,
-    //     userOrders: { ...action.payload, orders: action.payload.orders },
-    //   };
     default:
       return state;
   }

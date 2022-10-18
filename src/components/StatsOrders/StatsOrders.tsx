@@ -2,11 +2,11 @@ import { FC } from "react";
 import { useSelector } from "../../services/hooks";
 import styles from './statsOrders.module.css';
 
-export const StatsOrders = () => {
+export const StatsOrders: FC = () => {
 	const { orders, total, totalToday } = useSelector(store => store.ordersList);
 
-	const orderDone = orders.orders?.filter(order => order.status === 'done').slice(0,20);
-	const orderPending = orders.orders?.filter(order => order.status !== 'done').slice(0,20);
+	const orderDone = orders?.filter(order => order.status === 'done').slice(0,20);
+	const orderPending = orders?.filter(order => order.status !== 'done').slice(0,20);
 
 	return (
 		<div className={styles.wrapper}>

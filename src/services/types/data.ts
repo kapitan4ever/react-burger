@@ -24,7 +24,7 @@ export type TIngredient = {
   type: string;
   __v: number;
   _id: string;
-	id?: string;
+	id?: string | number;
 	count?: number;
 }
 
@@ -32,6 +32,14 @@ export type TUser = {
 	email: string;
 	name: string;
 	createdAt?: string;
+}
+
+export type TUserResponse = {
+	success: boolean;
+	user: TUser;
+	accessToken: string;
+	refreshToken: string;
+	message: string;
 }
 
 export type TOrder = {
@@ -70,13 +78,7 @@ export type TFeedResponse = {
 	orders: Array<TFeed>;
 }
 
-export type TUserResponse = {
-	success: boolean;
-	user: TUser;
-	accessToken: string;
-	refreshToken: string;
-	message: string;
-}
+
 
 export type TIngredientResponse = {
 	data: Array<TIngredient>;

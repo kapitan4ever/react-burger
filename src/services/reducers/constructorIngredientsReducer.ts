@@ -5,14 +5,39 @@ import {
   REPLACE_BURGER_FILLING,
   ERASE_CONSTRUCTOR,
 } from "../actions/constructBurger";
+import { TBurgerConstructorActions } from "../actions/constructBurger";
+import { TIngredient } from "../types/data";
 
-const defaultState = {
-  bun: [],
+export type TInitialState = {
+	bun: TIngredient;
+	filling: TIngredient[];
+	orderId: string[];
+	bunRequestSuccess: boolean;
+}
+
+const initialState: TInitialState = {
+  bun: {
+		calories: 0,
+		carbohydrates: 0,
+		fat: 0,
+		image: '',
+		image_large: '',
+		image_mobile: '',
+		name: '',
+		price: 0,
+		proteins: 0,
+		type: "bun",
+		__v: 0,
+		_id: '',
+		id: '',
+		count: 0,
+	},
   filling: [],
   orderId: [],
+	bunRequestSuccess: false,
 };
 
-export const constructorIngredientsReducer = (state = defaultState, action) => {
+export const constructorIngredientsReducer = (state = initialState, action: TBurgerConstructorActions): TInitialState => {
   switch (action.type) {
     case ADD_BURGER_FILLING:
       return {
@@ -25,6 +50,7 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
         ...state,
         bun: action.payload,
         orderId: [...state.orderId, action.payload._id],
+				bunRequestSuccess: true,
       };
     case DELETE_BURGER_FILLING:
       return {
@@ -49,7 +75,8 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
       return {
         ...state,
         filling: [],
-        bun: {},
+        bun: initialState.bun,
+				bunRequestSuccess: false,
       };
     default:
       return state;

@@ -12,7 +12,6 @@ type TWsInitialState = {
   orders: TFeed[],
   total: number;
 	totalToday: number;
-	userOrders: TFeed[],
 }
 
 const initialState: TWsInitialState = {
@@ -20,7 +19,6 @@ const initialState: TWsInitialState = {
   orders: [],
   total: 0,
 	totalToday: 0,
-	userOrders: [],
 };
 
 export const wsReducer = (state = initialState, action: TWsActions): TWsInitialState => {

@@ -8,7 +8,7 @@ import {
   deleteBurgerFilling,
   replaceBurgerFilling,
 } from "../../services/actions/constructBurger";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 

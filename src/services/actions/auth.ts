@@ -110,8 +110,8 @@ interface IResetPasswordRequest {
 }
 interface IResetPasswordSuccess {
   readonly type: typeof RESET_PASSWORD_SUCCESS;
-  password: string;
-  token: string;
+  // password: string;
+  // token: string;
 }
 interface IResetPasswordFailed {
   readonly type: typeof RESET_PASSWORD_FAILED;
@@ -141,8 +141,7 @@ interface ILoginFormRequest {
 }
 interface ILoginFormSuccess {
   readonly type: typeof LOGIN_FORM_SUCCESS;
-  email: string;
-  password: string;
+  readonly user: TUser;
 }
 interface ILoginFormFailed {
   readonly type: typeof LOGIN_FORM_FAILED;
@@ -268,7 +267,7 @@ export const registerUser: AppThunk = (
       .then((res) => {
         dispatch({
           type: REGISTER_FORM_SUCCESS,
-          user: res,
+          user: res.user,
         });
       })
       .catch(() => {
@@ -334,7 +333,7 @@ export const updateUser: AppThunk = (
       .then((res) => {
         dispatch({
           type: PATCH_USER_SUCCESS,
-          user: res,
+          user: res.user,
         });
       })
       .catch(() => {
@@ -369,7 +368,7 @@ export const updateToken: AppThunk = () => {
         localStorage.setItem("refreshToken", refreshToken);
         dispatch({
           type: UPDATE_TOKEN_SUCCESS,
-          user: res,
+          user: res.user,
         });
       })
       .catch(() => {

@@ -1,6 +1,5 @@
-import { FC, useState, useMemo } from "react";
-import { useSelector, useDispatch } from "../../services/hooks";
-//import { useDispatch, useSelector } from "react-redux";
+import { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
@@ -25,11 +24,10 @@ import { itemTypes } from "../../utils/types";
 import { addToConstructor } from "../../services/actions/constructor";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../services/utils";
-import { TIngredient, TLocation } from "../../services/types/data";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { bun, filling, orderId } = useSelector(
+  const { bun, filling, orderId, bunRequestSuccess } = useSelector(
     (state) => state.constructorIngredients
   );
   const { orderDetailsRequest } = useSelector((state) => state.order);
@@ -38,14 +36,14 @@ const BurgerConstructor = () => {
 
   const [isOpened, setIsOpened] = useState(false);
 
-  const ingredientIds = useMemo(
-    () => [...filling.map((item) => item._id), bun._id, bun._id],
-    [filling, bun]
-  );
+  // const ingredientIds = useMemo(
+  //   () => [...filling.map((item) => item._id), bun._id, bun._id],
+  //   [filling, bun]
+  // );
 
   const sum = useMemo(() => {
     return (
-      (Object.keys(bun).length ? bun.price * 2 : 0) +
+      (bunRequestSuccess ? bun.price * 2 : 0) +
       filling.reduce((total, item) => total + item.price, 0)
     );
   }, [bun, filling]);
@@ -79,7 +77,7 @@ const BurgerConstructor = () => {
     <section className={`${styles.box} mt-25`}>
       <ul ref={dropTarget} className={`${isHover ? styles.isHover : ""}`}>
         <li className={`${styles.bunItem} ml-8`}>
-          {Object.keys(bun).length > 0 && (
+          {bunRequestSuccess && (
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -101,11 +99,11 @@ const BurgerConstructor = () => {
         </ul>
 
         <li className={`${styles.bunItem} ml-8 mt-4`}>
-          {Object.keys(bun).length > 0 && (
+          {bunRequestSuccess && (
             <ConstructorElement
               type="bottom"
               isLocked={true}
-              text={`${bun.name} (верх)`}
+              text={`${bun.name} (низ)`}
               price={bun.price}
               thumbnail={bun.image}
             />
