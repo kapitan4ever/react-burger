@@ -27,7 +27,7 @@ import { getCookie } from "../../services/utils";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
-  const { bun, filling, orderId } = useSelector(
+  const { bun, filling, orderId, bunRequestSuccess } = useSelector(
     (state) => state.constructorIngredients
   );
   const { orderDetailsRequest } = useSelector((state) => state.order);
@@ -43,7 +43,7 @@ const BurgerConstructor = () => {
 
   const sum = useMemo(() => {
     return (
-      (Object.keys(bun).length ? bun.price * 2 : 0) +
+      (bunRequestSuccess ? bun.price * 2 : 0) +
       filling.reduce((total, item) => total + item.price, 0)
     );
   }, [bun, filling]);
@@ -77,15 +77,13 @@ const BurgerConstructor = () => {
     <section className={`${styles.box} mt-25`}>
       <ul ref={dropTarget} className={`${isHover ? styles.isHover : ""}`}>
         <li className={`${styles.bunItem} ml-8`}>
-          {Object.keys(bun).length > 0 && (
-            <ConstructorElement
-              type="top"
-              isLocked={true}
+				{!bunRequestSuccess 
+				? <p className='text text_type_main-default pr-2'>Перетащите сюда булку</p> 
+				: (<ConstructorElement type="top" isLocked={true}
               text={`${bun.name} (верх)`}
               price={bun.price}
               thumbnail={bun.image}
-            />
-          )}
+							key={bun._id}/>) }
         </li>
 
         <ul className={`${styles.fillingList} ml-4`}>
@@ -99,15 +97,13 @@ const BurgerConstructor = () => {
         </ul>
 
         <li className={`${styles.bunItem} ml-8 mt-4`}>
-          {Object.keys(bun).length > 0 && (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={`${bun.name} (верх)`}
+				{!bunRequestSuccess 
+				? <p className='text text_type_main-default pr-2'>Перетащите сюда булку</p> 
+				: (<ConstructorElement type="bottom" isLocked={true}
+              text={`${bun.name} (низ)`}
               price={bun.price}
               thumbnail={bun.image}
-            />
-          )}
+							key={bun._id}/>) }
         </li>
       </ul>
       <div className={`${styles.total} mt-10 mr-4 mb-10`}>

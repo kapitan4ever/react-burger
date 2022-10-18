@@ -31,6 +31,13 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getUser } from "../../services/actions/auth";
 import OrderInfo from "../OrderInfo/OrderInfo";
 
+// использовать в tsx с 18v react
+// declare module 'react' {
+//   interface FunctionComponent<P = {}> {
+//     (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
+//   }
+// }
+
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();

@@ -10,6 +10,7 @@ const defaultState = {
   bun: [],
   filling: [],
   orderId: [],
+	bunRequestSuccess: false
 };
 
 export const constructorIngredientsReducer = (state = defaultState, action) => {
@@ -25,6 +26,7 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
         ...state,
         bun: action.payload,
         orderId: [...state.orderId, action.payload._id],
+				bunRequestSuccess: true
       };
     case DELETE_BURGER_FILLING:
       return {
@@ -50,6 +52,7 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
         ...state,
         filling: [],
         bun: {},
+				bunRequestSuccess: false
       };
     default:
       return state;

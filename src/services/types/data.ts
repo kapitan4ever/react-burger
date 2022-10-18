@@ -36,6 +36,17 @@ export type TUserResponse = {
 	message: string;
 }
 
+export type TOrder = {
+	ingredients: TIngredient[];
+	name: string;
+	number: number;
+	owner: TUser;
+	price: number;
+	status: string;
+	_id: string;
+	createdAt: string;
+}
+
 export type TSocketMiddlewareActions = {
 	wsInit: string;
 	wsClose: string;
@@ -59,4 +70,21 @@ export type TFeedResponse = {
 	total: number;
 	totalToday: number;
 	orders: Array<TFeed>;
+}
+
+export type TIngredientResponse = {
+	data: Array<TIngredient>;
+	success: boolean;
+}
+
+export type TOrderDetailsResponse = {
+	name: string
+	order: TOrder;
+	success: boolean;
+}
+
+export type TUserLogoutResponse = {
+	message: string;
+	success: boolean;
+	refreshToken: string;
 }

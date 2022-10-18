@@ -1,7 +1,13 @@
 import { getCookie } from "../../services/utils";
+import {
+  TIngredientResponse,
+  TOrderDetailsResponse,
+  TUserLogoutResponse,
+  TUserResponse,
+} from "../../services/types/data";
 export const baseUrl = "https://norma.nomoreparties.space/api/";
 
-export const checkResponse = (res) => {
+export const checkResponse = <T>(res: Response): Promise<T> => {
   if (res.ok) {
     return res.json();
   } else {
@@ -9,7 +15,7 @@ export const checkResponse = (res) => {
   }
 };
 
-export const orderDetailsRequest = async (productsId) => {
+export const orderDetailsRequest = async (productsId: string[]) => {
 	const res = await fetch(`${baseUrl}orders`, {
 		method: 'POST',
 		body: JSON.stringify({
@@ -20,7 +26,7 @@ export const orderDetailsRequest = async (productsId) => {
 			Authorization: 'Bearer ' + getCookie('token')
 		},
 	})
-	return checkResponse(res);
+	return checkResponse<TOrderDetailsResponse>(res);
 }
 
 export const getIngredientsData = async () => {
@@ -30,11 +36,11 @@ export const getIngredientsData = async () => {
       "Content-Type": "application/json",
     },
   });
-  return checkResponse(res);
+  return checkResponse<TIngredientResponse>(res);
 };
 
 //запрос к эндпоинту fogot-password
-export const forgotPasswordRequest = async (email) => {
+export const forgotPasswordRequest = async (email: string) => {
   return await fetch(`${baseUrl}password-reset`, {
     method: "POST",
     headers: {
@@ -43,10 +49,10 @@ export const forgotPasswordRequest = async (email) => {
     body: JSON.stringify({
       email,
     }),
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserResponse>(res));
 };
 //запрос к эндпоинту reset-password
-export const resetPasswordRequest = async (password, token) => {
+export const resetPasswordRequest = async (password: string, token: string | any) => {
   return await fetch(`${baseUrl}password-reset/reset`, {
     method: "POST",
     mode: "cors",
@@ -61,10 +67,10 @@ export const resetPasswordRequest = async (password, token) => {
       password,
       token,
     }),
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserResponse>(res));
 };
 //запрос к эндпоинту auth/register для создания пользователя
-export const registerUserRequest = async (email, password, name) => {
+export const registerUserRequest = async (email: string, password: string, name: string) => {
   return await fetch(`${baseUrl}auth/register`, {
     method: "POST",
     headers: {
@@ -75,10 +81,10 @@ export const registerUserRequest = async (email, password, name) => {
       password,
       name,
     }),
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserResponse>(res));
 };
 //запрос к эндпоинту auth/login
-export const loginRequest = async (email, password) => {
+export const loginRequest = async (email: string, password: string) => {
   return await fetch(`${baseUrl}auth/login`, {
     method: "POST",
     headers: {
@@ -88,7 +94,7 @@ export const loginRequest = async (email, password) => {
       email,
       password,
     }),
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserResponse>(res));
 };
 //запрос к эндпоинту auth/logout
 export const logoutRequest = async () => {
@@ -100,7 +106,7 @@ export const logoutRequest = async () => {
 		body: JSON.stringify({
 			token: localStorage.getItem('refreshToken'),
 		}),
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserLogoutResponse>(res));
 };
 //эндпоинт получения данных о пользователе
 export const getUserRequest = async () => {
@@ -110,10 +116,10 @@ export const getUserRequest = async () => {
       "Content-Type": "application/json",
 			Authorization: 'Bearer ' + getCookie('token')
     },
-  }).then(checkResponse);
+  }).then(res => checkResponse<TUserResponse>(res));
 };
 //эндпоинт обновления данных о пользователе
-export const updateUserRequest = async (email, name, password) => {
+export const updateUserRequest = async (email: string, name: string, password: string) => {
 	return await fetch(`${baseUrl}auth/user`, {
 		method: 'PATCH',
 		headers: {
@@ -126,7 +132,7 @@ export const updateUserRequest = async (email, name, password) => {
 			password: password,
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUserResponse>(res));
 }
 //обновление токена
 export const updateTokenRequest = async () => {
@@ -139,5 +145,5 @@ export const updateTokenRequest = async () => {
 			token: localStorage.getItem('refreshToken'),
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUserResponse>(res));
 }

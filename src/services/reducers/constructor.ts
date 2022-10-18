@@ -11,6 +11,7 @@ export type TInitialState = {
   bun: TIngredient;
   items: TIngredient[];
   itemsId: string[];
+	bunRequestSuccess: boolean;
 };
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   },
   items: [],
   itemsId: [],
+	bunRequestSuccess: false
 };
 
 export const constructorReducer = (
@@ -45,6 +47,7 @@ export const constructorReducer = (
           ...state,
           bun: action.data,
           itemsId: [...state.itemsId, action.data._id],
+					bunRequestSuccess: true
         };
       }
       return {
@@ -78,6 +81,7 @@ export const constructorReducer = (
         ...state,
         items: [],
         bun: initialState.bun,
+				bunRequestSuccess: false
       };
     }
     default: {
