@@ -4,14 +4,40 @@ import {
   CONSTRUCTOR_RESET,
   CONSTRUCTOR_REPLACE,
 } from "../actions/constructor";
+import { TIngredient } from "../types/data";
+import { TConstructorActions } from "../actions/constructor";
+
+export type TInitialState = {
+  bun: TIngredient;
+  items: TIngredient[];
+  itemsId: string[];
+};
 
 const initialState = {
-  bun: [],
+  bun: {
+    calories: 0,
+    carbohydrates: 0,
+    fat: 0,
+    image: "",
+    image_large: "",
+    image_mobile: "",
+    name: "",
+    price: 0,
+    proteins: 0,
+    type: "bun",
+    __v: 0,
+    _id: "",
+    id: "",
+    count: 0,
+  },
   items: [],
   itemsId: [],
 };
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (
+  state = initialState,
+  action: TConstructorActions
+): TInitialState => {
   switch (action.type) {
     case CONSTRUCTOR_ADD: {
       if (action.data.type === "bun") {
@@ -31,7 +57,7 @@ export const constructorReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items].filter((item) => {
-          return item.id !== action.id;
+          return (item as TIngredient).id !== action.id;
         }),
       };
     }
@@ -51,7 +77,7 @@ export const constructorReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [],
-        bun: [],
+        bun: initialState.bun,
       };
     }
     default: {

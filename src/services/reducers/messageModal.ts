@@ -2,13 +2,22 @@ import {
   CLOSE_LOADING_MODAL,
   CLOSE_ERROR_MODAL,
 } from "../actions/messageModal";
+import { TCloseModalAction } from "../actions/messageModal";
 
-const defaultState = {
+export type TMessageModalInitialState = {
+  errorPopup: boolean;
+  loadingPopup: boolean;
+};
+
+const initialState: TMessageModalInitialState = {
   errorPopup: false,
   loadingPopup: false,
 };
 
-export const messageModalReducer = (state = defaultState, action) => {
+export const messageModalReducer = (
+  state = initialState,
+  action: TCloseModalAction
+): TMessageModalInitialState => {
   switch (action.type) {
     case CLOSE_ERROR_MODAL:
       return {
