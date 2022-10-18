@@ -4,16 +4,40 @@ import {
   DELETE_BURGER_FILLING,
   REPLACE_BURGER_FILLING,
   ERASE_CONSTRUCTOR,
+	TBurgerConstructorActions,
 } from "../actions/constructBurger";
+import { TIngredient } from "../types/data";
 
-const defaultState = {
-  bun: [],
+export type TDeafaultState = {
+	bun: TIngredient;
+  filling: TIngredient[];
+  orderId: string[];
+	bunRequestSuccess: boolean;
+}
+
+const defaultState: TDeafaultState = {
+  bun: {
+		calories: 0,
+		carbohydrates: 0,
+		fat: 0,
+		image: '',
+		image_large: '',
+		image_mobile: '',
+		name: '',
+		price: 0,
+		proteins: 0,
+		type: "bun",
+		__v: 0,
+		_id: '',
+		id: '',
+		count: 0,
+	},
   filling: [],
   orderId: [],
 	bunRequestSuccess: false
 };
-
-export const constructorIngredientsReducer = (state = defaultState, action) => {
+//конструктор бургера на главной (правый блок)
+export const constructorIngredientsReducer = (state = defaultState, action: TBurgerConstructorActions): TDeafaultState => {
   switch (action.type) {
     case ADD_BURGER_FILLING:
       return {
@@ -51,7 +75,7 @@ export const constructorIngredientsReducer = (state = defaultState, action) => {
       return {
         ...state,
         filling: [],
-        bun: {},
+        bun: defaultState.bun,
 				bunRequestSuccess: false
       };
     default:
