@@ -1,5 +1,7 @@
-import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useMemo, FC } from "react";
+//import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
+import { TIngredient, TLocation } from "../../services/types/data";
 import { useDrop } from "react-dnd";
 import {
   ConstructorElement,
