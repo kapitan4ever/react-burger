@@ -37,12 +37,12 @@ export function closeOrderModal() {
   };
 }
 
-export const getOrderDetails: AppThunk = (orderDetails: Array<string>) => {
+export const getOrderDetails: AppThunk = (order: Array<string>) => {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: ORDER_DETAILS_REQUEST,
     });
-    orderDetailsRequest(orderDetails)
+    orderDetailsRequest(order)
       .then((res) => {
         dispatch({
           type: ORDER_DETAILS_SUCCESS,

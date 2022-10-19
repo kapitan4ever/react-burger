@@ -5,19 +5,21 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 //import { itemTypes } from "../../utils/types";
 import {
-  deleteBurgerFilling,
+  // deleteBurgerFilling,
   replaceBurgerFilling,
 } from "../../services/actions/constructBurger";
+import {DELETE_BURGER_FILLING} from "../../services/actions/constructBurger"
 import { useDispatch } from "../../services/hooks";
 import { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import {TIngredient} from "../../services/types/data";
 
-type TIngredient = {
-	name: string;
-	price: number;
-	image: string;
-	id?: string;
-}
+// type TIngredient = {
+// 	name: string;
+// 	price: number;
+// 	image: string;
+// 	id?: string;
+// }
 
 type TConstructorItem = {
 	data: TIngredient;
@@ -35,7 +37,11 @@ const ConstructorItem: FC<TConstructorItem> = ({ data, index }) => {
   const { name, price, image, id } = data;
   const dispatch = useDispatch();
   const onDelete = (id: string | undefined) => {
-    dispatch(deleteBurgerFilling({ id }));
+		dispatch({
+			type: DELETE_BURGER_FILLING,
+			id: id,
+		});
+    // dispatch(deleteBurgerFilling({ id }));
   };
   const filRef = useRef(null);
   const [{ isDragging }, drag] = useDrag({

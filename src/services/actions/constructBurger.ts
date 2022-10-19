@@ -17,12 +17,13 @@ export interface IAddBurgerFilling {
 export interface IAddBurgerBun {
   readonly type: typeof ADD_BURGER_BUN;
   payload: TIngredient;
-	// orderId: string[];
-	// bun: TIngredient;
+	orderId: string[];
+	bun: TIngredient;
 }
 export interface IDeleteBurgerFilling {
   readonly type: typeof DELETE_BURGER_FILLING;
   payload: TIngredient;
+	id: string;
 }
 export interface IReplaceBurgerFilling {
   readonly type: typeof REPLACE_BURGER_FILLING;
@@ -44,13 +45,16 @@ export const addBurgerFillingAction = (payload: TIngredient): IAddBurgerFilling 
   id: nanoid(),
   payload,
 });
-export const addBurgerBunAction = (payload: TIngredient): IAddBurgerBun => ({
+export const addBurgerBunAction = (payload: TIngredient, orderId: string[], bun: TIngredient): IAddBurgerBun => ({
   type: ADD_BURGER_BUN,
   payload,
+	orderId,
+	bun
 });
-export const deleteBurgerFilling = (payload: any): IDeleteBurgerFilling => ({
+export const deleteBurgerFilling = (payload: any, id: string): IDeleteBurgerFilling => ({
   type: DELETE_BURGER_FILLING,
   payload,
+	id
 });
 
 export const replaceBurgerFilling = (payload: any): IReplaceBurgerFilling => ({

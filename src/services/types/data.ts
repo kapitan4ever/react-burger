@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 export type TLocation = {
 	state?: object;
 	from: string;
@@ -24,7 +25,7 @@ export type TIngredient = {
   type: string;
   __v: number;
   _id: string;
-	id?: string | number;
+	id?: string;
 	count?: number;
 }
 
@@ -96,3 +97,4 @@ export type TUserLogoutResponse = {
 	success: boolean;
 	refreshToken: string;
 }
+
