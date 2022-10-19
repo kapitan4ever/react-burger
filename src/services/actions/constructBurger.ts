@@ -39,25 +39,25 @@ interface IConstructorReset {
 
 export type TBurgerConstructorActions = IAddBurgerFilling | IAddBurgerBun | IDeleteBurgerFilling | IReplaceBurgerFilling | IConstructorReset;
 
-export const addBurgerFillingAction = (payload: Array<string>) => ({
+export const addBurgerFillingAction = (payload: TIngredient): IAddBurgerFilling => ({
   type: ADD_BURGER_FILLING,
   id: nanoid(),
   payload,
 });
-export const addBurgerBunAction = (payload: Array<string>) => ({
+export const addBurgerBunAction = (payload: TIngredient): IAddBurgerBun => ({
   type: ADD_BURGER_BUN,
   payload,
 });
-export const deleteBurgerFilling = (payload: any) => ({
+export const deleteBurgerFilling = (payload: any): IDeleteBurgerFilling => ({
   type: DELETE_BURGER_FILLING,
   payload,
 });
 
-export const replaceBurgerFilling = (payload: any) => ({
+export const replaceBurgerFilling = (payload: any): IReplaceBurgerFilling => ({
   type: REPLACE_BURGER_FILLING,
   payload,
 });
 
-export const eraseConstructorAction = () => ({
+export const eraseConstructorAction = (): IConstructorReset => ({
   type: ERASE_CONSTRUCTOR,
 });

@@ -1,5 +1,4 @@
 import { useState, useMemo, FC } from "react";
-//import { useDispatch, useSelector } from "react-redux";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { TIngredient, TLocation } from "../../services/types/data";
 import { useDrop } from "react-dnd";
@@ -8,15 +7,11 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import { getOrderDetails } from "../../services/actions/orderDetails";
-
 import styles from "./BurgerConstructor.module.css";
 import ConstructorItem from "../ConstructorItem/ConstructorItem";
-
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
-
 import {
   addBurgerFillingAction,
   addBurgerBunAction,
