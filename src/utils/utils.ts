@@ -1,41 +1,21 @@
+const formatDay = (day: number, orderDate: Date) => {
+	if (day === 0) {
+			return 'Сегодня';
+	}
+	if (day === 1) {
+			return 'Вчера';
+	}
+	if (day > 1 && day < 4) {
+			return `${day} дня назад`
+	}
+	return orderDate.toLocaleDateString("ru-RU")
+}
+
 export const formatDate = (date: string) => {
-	const formatter = new Intl.DateTimeFormat("ru", {
-		hour: 'numeric',
-		minute: 'numeric',
-		timeZone: 'Europe/Moscow'
-	});
-
-	let dateOfOrder = new Date(date);
-
-	const today = new Date();
-
-	function diffSubtract(dayOne: any, dayTwo: any): number {
-		return Math.ceil((dayOne - dayTwo) / 86400000);
-	}
-
-	let dayQty = diffSubtract(today, dateOfOrder);
-
-	const formatterForFay = new Intl.DateTimeFormat("ru", {
-		day: 'numeric',
-		year: 'numeric',
-		month: 'long',
-		timeZone: 'Europe/Moscow'
-	});
-
-	const formatDay = (dateOfOrder: Date, dayQty: number): string | undefined => {
-		if (formatterForFay.format(today) === formatterForFay.format(dateOfOrder)) {
-			return 'Cегодня'
-		}
-		if (dayQty === 1) {
-			return 'Вчера'
-		}
-		if (dayQty === 2 || dayQty === 3 || dayQty === 4) {
-			return `${dayQty} дня назад`
-		}
-		if (dayQty > 4) {
-			return `${dateOfOrder.toLocaleDateString("ru-RU")}`
-		}
-
-	}
-	return `${formatDay(dateOfOrder, dayQty)}, ${formatter.format(dateOfOrder)} i-GMT+3`
-};
+	const orderDate = new Date(date);
+	const diff = new Date().getDate() - orderDate.getDate();
+	const diffInDays = formatDay(diff, orderDate);
+	const hours = orderDate.getHours() > 9 ? `${orderDate.getHours()}` : `0${orderDate.getHours()}`
+	const minutes = orderDate.getMinutes() > 9 ? `${orderDate.getMinutes()}` : `0${orderDate.getMinutes()}`
+	return `${diffInDays}, ${hours}:${minutes} i-GMT+${-orderDate.getTimezoneOffset() / 60}`
+}
