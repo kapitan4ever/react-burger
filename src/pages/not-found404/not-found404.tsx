@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./not-found404.module.css";
 
@@ -20,4 +20,4 @@ export const Error404: FC = () => {
       </Link>
     </div>
   );
-}
+};

@@ -31,6 +31,7 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { getUser } from "../../services/actions/auth";
 import { OrderInfo } from "../OrderInfo/OrderInfo";
 import { TLocation } from "../../services/types/data";
+import OrderDetails from "../OrderDetails/OrderDetails";
 
 // использовать в tsx с 18v react
 declare module 'react' {
@@ -47,6 +48,7 @@ const App: FC = () => {
   const { ingredients, isLoading, hasError } = useSelector(
     (store) => store.ingredients
   );
+	
 
   const init = async () => {
     await dispatch(getIngredients());
@@ -150,6 +152,7 @@ const App: FC = () => {
           </Route>
         </Switch>
       )}
+
     </div>
   );
 };

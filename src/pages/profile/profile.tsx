@@ -33,7 +33,7 @@ export const Profile: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation<TLocation>();
   const background = location.state?.background;
-  const { email, name } = useSelector((state) => state.auth.user);
+  const { email, name } = useSelector(store => store.auth.user);
   const matchOrderDetails = !!useRouteMatch({ path: "/profile/orders/:id" });
 
   useEffect(() => {

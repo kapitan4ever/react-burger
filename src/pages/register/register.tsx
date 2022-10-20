@@ -14,7 +14,6 @@ import {
   setRegisterFormValue,
 } from "../../services/actions/auth";
 
-
 export const Register: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation<TLocation>();
@@ -86,4 +85,4 @@ export const Register: FC = () => {
       </div>
     </div>
   );
-}
+};

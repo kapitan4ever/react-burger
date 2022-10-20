@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, FormEvent } from "react";
+import { FC, FormEvent } from "react";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { TLocation } from "../../services/types/data";
 import { Link, Redirect, useLocation } from "react-router-dom";
@@ -12,13 +12,13 @@ export const ResetPassword: FC = () => {
 	const dispatch = useDispatch();
 	const location = useLocation<TLocation>();
 	const {values, handleChange} = useForm({});
-	const {code, password} = values;
+	const {code, clearPassword} = values;
 	const cookie = getCookie('token');
 	const {forgotPasswordSuccess} = useSelector(state => state.auth);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-		dispatch(resetPassword(password, code));
+		dispatch(resetPassword(clearPassword, code));
   };
 
 
@@ -38,8 +38,8 @@ export const ResetPassword: FC = () => {
         <div className={`${styles.form__input} mb-6`}>
           <PasswordInput
             onChange={handleChange}
-            value={password}
-            name={"password"}
+            value={clearPassword || ''}
+            name={"clearPassword"}
           />
         </div>
         <div className={`${styles.form__input} mb-6`}>

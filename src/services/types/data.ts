@@ -22,10 +22,10 @@ export type TIngredient = {
   name: string;
   price: number;
   proteins: number;
-  type: string;
+  type: "bun" | "sauce" | "main";
   __v: number;
   _id: string;
-	id?: string;
+	id?: any;
 	count?: number;
 }
 
@@ -78,8 +78,6 @@ export type TFeedResponse = {
 	totalToday: number;
 	orders: Array<TFeed>;
 }
-
-
 
 export type TIngredientResponse = {
 	data: Array<TIngredient>;

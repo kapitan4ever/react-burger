@@ -110,8 +110,8 @@ interface IResetPasswordRequest {
 }
 interface IResetPasswordSuccess {
   readonly type: typeof RESET_PASSWORD_SUCCESS;
-  // password: string;
-  // token: string;
+  //password: string;
+  //token: string;
 }
 interface IResetPasswordFailed {
   readonly type: typeof RESET_PASSWORD_FAILED;

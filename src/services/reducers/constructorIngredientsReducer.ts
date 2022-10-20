@@ -11,7 +11,7 @@ import { TIngredient } from "../types/data";
 export type TInitialState = {
 	bun: TIngredient;
 	filling: TIngredient[];
-	orderId: string[];
+	orderId: any;
 	bunRequestSuccess: boolean;
 }
 

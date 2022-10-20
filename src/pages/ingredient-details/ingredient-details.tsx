@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export const IngredientDetailsPage: FC = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  const { id } = useParams<{ id: string}>();
+  const { id } = useParams<{ id: string }>();
   const ingredient = ingredients.find(({ _id }) => _id === id);
 
   if (!ingredient) {
@@ -73,4 +73,4 @@ export const IngredientDetailsPage: FC = () => {
       </ul>
     </div>
   );
-}
+};
