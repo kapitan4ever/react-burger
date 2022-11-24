@@ -1,9 +1,23 @@
+# Проект: Космическая бургерная
+------
+## О проекте
+Соцсеть с возможностью добавления фотографий пользователей и лайков.
+[Макет](https://www.figma.com/file/6O4811T8kDFAjnIPfnQbdq/JavaScript.-Sprint-4-(Copy)?node-id=28212%3A155) в Figma
+В верстке использовал flex, grid для расположения блоков и элементов согласно макета. Основное отличие от первых работ это создание форм для загрузки фотографий и подписей к ним. Адаптивная верстка.
+
+## Стэк
+HTML, CSS, TS, React
+
+=======
+
+##Для просмотра проекта перейдите по ссылке ниже
+
+[react-burger](https://kapitan4ever.github.io/react-burger/))
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## link
-[react-burger](https://kapitan4ever.github.io/react-burger/)
 
 ## Available Scripts
 
