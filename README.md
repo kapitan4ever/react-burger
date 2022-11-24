@@ -12,7 +12,7 @@ HTML, CSS, TS, React
 
 ##Для просмотра проекта перейдите по ссылке ниже
 
-[react-burger](https://kapitan4ever.github.io/react-burger/))
+[react-burger](https://kapitan4ever.github.io/react-burger/)
 
 
 # Getting Started with Create React App
